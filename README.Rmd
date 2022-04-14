@@ -1,0 +1,47 @@
+---
+output: github_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    fig.path = "man/figures/README-",
+    out.width = "100%",
+    eval = TRUE
+)
+```
+
+# dtx
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/valid)](https://CRAN.R-project.org/package=valid)
+<!-- badges: end -->
+
+## Installation
+
+You can install the development version of from [GitHub](https://github.com/) with:
+
+```{r eval=FALSE}
+# install.packages("remotes")
+remotes::install_github("rappster/dtx")
+```
+
+## What?
+
+
+
+## Why?
+
+
+
+## How?
+
+```{r, eval=FALSE}
+library(dtx)
+```
