@@ -1,4 +1,4 @@
 library(testthat)
-library(dtx)
+library(dti)
 
-test_check("dtx")
+test_check("dti")

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dtx
+# dti
 
 <!-- badges: start -->
 
@@ -18,7 +18,7 @@ You can install the development version of from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("rappster/dtx")
+remotes::install_github("rappster/dti")
 ```
 
 ## What?
@@ -28,5 +28,5 @@ remotes::install_github("rappster/dtx")
 ## How?
 
 ``` r
-library(dtx)
+library(dti)
 ```

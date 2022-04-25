@@ -40,3 +40,4 @@ Temporary Items
 # End of https://www.toptal.com/developers/gitignore/api/macos
 .Rdata
 .httr-oauth
+inst/doc

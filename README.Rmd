@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# dtx
+# dti
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -29,7 +29,7 @@ You can install the development version of from [GitHub](https://github.com/) wi
 
 ```{r eval=FALSE}
 # install.packages("remotes")
-remotes::install_github("rappster/dtx")
+remotes::install_github("rappster/dti")
 ```
 
 ## What?
@@ -43,5 +43,5 @@ remotes::install_github("rappster/dtx")
 ## How?
 
 ```{r, eval=FALSE}
-library(dtx)
+library(dti)
 ```

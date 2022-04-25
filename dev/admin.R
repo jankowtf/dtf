@@ -8,6 +8,8 @@ renv::install("roxygen2md")
 renv::install("rmarkdown")
 renv::install("here")
 
+renv::install("dplyr")
+
 # Dev preps ---------------------------------------------------------------
 
 # Git
@@ -48,9 +50,30 @@ usethis::use_build_ignore(
 
 # Prod dependencies -------------------------------------------------------
 
-# renv::install("rappster/confx")
-# usethis::use_dev_package("confx", type = "Imports", remote = "rappster/confx")
+# --- Install
+renv::install("DT")
+renv::install("rappster/valid", rebuild = TRUE)
+renv::install("rappster/confx")
+renv::install("rappster/drop", rebuild = TRUE)
+renv::install("assertthat")
+renv::install("logger")
+renv::install("snakecase")
+
+# --- Declare
+usethis::use_package("DT")
+usethis::use_dev_package("valid", type = "Imports", remote = "rappster/valid")
+usethis::use_dev_package("confx", type = "Imports", remote = "rappster/confx")
+usethis::use_package("assertthat")
+usethis::use_package("logger")
+usethis::use_package("snakecase")
+usethis::use_dev_package("drop", type = "Imports", remote = "rappster/drop")
 
 # Tests -------------------------------------------------------------------
 
-usethis::use_test("package")
+usethis::use_test("dt")
+usethis::use_test("bundles")
+usethis::use_test("helpers")
+
+# Vignette ----------------------------------------------------------------
+
+usethis::use_vignette("overview")

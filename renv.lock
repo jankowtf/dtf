@@ -9,12 +9,36 @@
     ]
   },
   "Packages": {
+    "DT": {
+      "Package": "DT",
+      "Version": "0.22",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fc53164de9ee32692eef6fdd14115381",
+      "Requirements": [
+        "crosstalk",
+        "htmltools",
+        "htmlwidgets",
+        "jquerylib",
+        "jsonlite",
+        "magrittr",
+        "promises"
+      ]
+    },
     "R6": {
       "Package": "R6",
       "Version": "2.5.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "470851b6d5d0ac559e9d01bb352b4021",
+      "Requirements": []
+    },
+    "Rcpp": {
+      "Package": "Rcpp",
+      "Version": "1.0.8.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "32e79b908fda56ee57fe518a8d37b864",
       "Requirements": []
     },
     "askpass": {
@@ -26,6 +50,14 @@
       "Requirements": [
         "sys"
       ]
+    },
+    "assertthat": {
+      "Package": "assertthat",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "50c838a310445e954bc13f26f26a6ecf",
+      "Requirements": []
     },
     "base64enc": {
       "Package": "base64enc",
@@ -113,6 +145,42 @@
       "Hash": "2ba81b120c1655ab696c935ef33ea716",
       "Requirements": []
     },
+    "config": {
+      "Package": "config",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "31d77b09f63550cee9ecb5a08bf76e8f",
+      "Requirements": [
+        "yaml"
+      ]
+    },
+    "confx": {
+      "Package": "confx",
+      "Version": "0.0.0.9024",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rappster",
+      "RemoteRepo": "confx",
+      "RemoteRef": "master",
+      "RemoteSha": "e53517faa50f118ade6182c7062c5e5f0d0bc99b",
+      "Remotes": "rappster/valid",
+      "Hash": "b88dcfcbbd8b759f38c81069390096a0",
+      "Requirements": [
+        "config",
+        "fs",
+        "here",
+        "lifecycle",
+        "magrittr",
+        "pkgload",
+        "purrr",
+        "rlang",
+        "stringr",
+        "usethis",
+        "valid"
+      ]
+    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.4.2",
@@ -141,6 +209,19 @@
         "jsonlite",
         "openssl",
         "sys"
+      ]
+    },
+    "crosstalk": {
+      "Package": "crosstalk",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6aa54f69598c32177e920eb3402e8293",
+      "Requirements": [
+        "R6",
+        "htmltools",
+        "jsonlite",
+        "lazyeval"
       ]
     },
     "curl": {
@@ -210,6 +291,42 @@
       "Hash": "cf6b206a045a684728c3267ef7596190",
       "Requirements": []
     },
+    "dplyr": {
+      "Package": "dplyr",
+      "Version": "1.0.8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ef47665e64228a17609d6df877bf86f2",
+      "Requirements": [
+        "R6",
+        "generics",
+        "glue",
+        "lifecycle",
+        "magrittr",
+        "pillar",
+        "rlang",
+        "tibble",
+        "tidyselect",
+        "vctrs"
+      ]
+    },
+    "drop": {
+      "Package": "drop",
+      "Version": "0.0.0.9002",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rappster",
+      "RemoteRepo": "drop",
+      "RemoteRef": "main",
+      "RemoteSha": "050fc11999a87880052f6d52533e18749ee3d70f",
+      "Hash": "4cc71a49a20c2416046111e6369f202e",
+      "Requirements": [
+        "lifecycle",
+        "magrittr",
+        "rrapply"
+      ]
+    },
     "ellipsis": {
       "Package": "ellipsis",
       "Version": "0.3.2",
@@ -260,6 +377,14 @@
       "Hash": "7c89603d81793f0d5486d91ab1fc6f1d",
       "Requirements": []
     },
+    "generics": {
+      "Package": "generics",
+      "Version": "0.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "177475892cf4a55865868527654a7741",
+      "Requirements": []
+    },
     "gert": {
       "Package": "gert",
       "Version": "1.6.0",
@@ -305,6 +430,16 @@
       "Hash": "4f2596dfb05dac67b9dc558e5c6fba2e",
       "Requirements": []
     },
+    "here": {
+      "Package": "here",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "24b224366f9c2e7534d2344d10d59211",
+      "Requirements": [
+        "rprojroot"
+      ]
+    },
     "highr": {
       "Package": "highr",
       "Version": "0.9",
@@ -326,6 +461,18 @@
         "digest",
         "fastmap",
         "rlang"
+      ]
+    },
+    "htmlwidgets": {
+      "Package": "htmlwidgets",
+      "Version": "1.5.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "76147821cd3fcd8c4b04e1ef0498e7fb",
+      "Requirements": [
+        "htmltools",
+        "jsonlite",
+        "yaml"
       ]
     },
     "httr": {
@@ -382,6 +529,17 @@
         "yaml"
       ]
     },
+    "later": {
+      "Package": "later",
+      "Version": "1.3.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7e7b457d7766bc47f2a5f21cc2984f8e",
+      "Requirements": [
+        "Rcpp",
+        "rlang"
+      ]
+    },
     "lazyeval": {
       "Package": "lazyeval",
       "Version": "0.2.2",
@@ -400,6 +558,14 @@
         "glue",
         "rlang"
       ]
+    },
+    "logger": {
+      "Package": "logger",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c269b06beb2bbadb0d058c0e6fa4ec3d",
+      "Requirements": []
     },
     "magrittr": {
       "Package": "magrittr",
@@ -522,6 +688,20 @@
       "Requirements": [
         "R6",
         "ps"
+      ]
+    },
+    "promises": {
+      "Package": "promises",
+      "Version": "1.2.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4ab2c43adb4d4699cf3690acd378d75d",
+      "Requirements": [
+        "R6",
+        "Rcpp",
+        "later",
+        "magrittr",
+        "rlang"
       ]
     },
     "ps": {
@@ -682,6 +862,14 @@
       "Hash": "1de7ab598047a87bba48434ba35d497d",
       "Requirements": []
     },
+    "rrapply": {
+      "Package": "rrapply",
+      "Version": "1.2.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5ac5cc11fde44974e53f05c85ab0eb8e",
+      "Requirements": []
+    },
     "rstudioapi": {
       "Package": "rstudioapi",
       "Version": "0.13",
@@ -723,6 +911,17 @@
       "Hash": "3f9796a8d0a0e8c6eb49a4b029359d1f",
       "Requirements": [
         "cli"
+      ]
+    },
+    "snakecase": {
+      "Package": "snakecase",
+      "Version": "0.11.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4079070fc210c7901c0832a3aeab894f",
+      "Requirements": [
+        "stringi",
+        "stringr"
       ]
     },
     "stringi": {
@@ -798,6 +997,20 @@
         "vctrs"
       ]
     },
+    "tidyselect": {
+      "Package": "tidyselect",
+      "Version": "1.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "17f6da8cfd7002760a859915ce7eef8f",
+      "Requirements": [
+        "ellipsis",
+        "glue",
+        "purrr",
+        "rlang",
+        "vctrs"
+      ]
+    },
     "tinytex": {
       "Package": "tinytex",
       "Version": "0.38",
@@ -843,6 +1056,21 @@
       "Repository": "CRAN",
       "Hash": "c9c462b759a5cc844ae25b5942654d13",
       "Requirements": []
+    },
+    "valid": {
+      "Package": "valid",
+      "Version": "0.0.0.9006",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rappster",
+      "RemoteRepo": "valid",
+      "RemoteRef": "main",
+      "RemoteSha": "e2cc2c77f352fbcc8e488fe790561543e283b3f4",
+      "Hash": "0266bc7c9dde5f29251615e0f2ea5c3f",
+      "Requirements": [
+        "magrittr"
+      ]
     },
     "vctrs": {
       "Package": "vctrs",

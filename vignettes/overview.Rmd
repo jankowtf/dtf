@@ -1,0 +1,392 @@
+---
+title: "overview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{overview}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+)
+```
+
+```{r setup}
+library(dti)
+logger::log_threshold(logger::TRACE)
+```
+
+# AutoFill
+
+See https://rstudio.github.io/DT/extensions.html (setion *1. AutoFill*)
+
+With the AutoFill extension, you will see a blue square in the bottom-right corner of a cell when you mouse over the cell. You can drag it to automatically fill the column.
+
+## Default
+
+```{r}
+dt_bundle_autofill()
+dt_bundle_autofill(.verbose = TRUE)
+```
+
+```{r}
+mtcars %>% datatable2(bundle = dt_bundle_autofill())
+```
+
+```{r}
+mtcars %>% datatable2(bundle = "AutoFill")
+```
+
+For comparison when calling `DT::datatable()` 
+
+```{r}
+mtcars %>% DT::datatable(
+    extensions = "AutoFill", 
+    options = list(
+        autoFill = TRUE
+    )
+)
+```
+
+## Custom options
+
+Pass some initialization options to AutoFill: only enable auto filling on the
+columns 2, 3, 4; show the blue square on click instead of hover.
+
+```{r}
+dt_bundle_autofill(columns = c(1, 2, 3))
+dt_bundle_autofill(.options = list(columns = c(1, 2, 3), focus = "click"))
+dt_bundle_autofill(columns = c("mpg", "disp"), .data = mtcars)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_autofill(columns = c(1, 2, 3))
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_autofill(columns = c(1, 2, 3), focus = "click")
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_autofill(
+        columns = c("mpg", "disp"), 
+        focus = "click",
+        .data = mtcars
+    )
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = list(
+        dt_bundle_autofill(
+            .options = list(columns = c(1, 2, 3), focus = "click")
+        )
+    )
+)
+```
+
+For comparison when calling `DT::datatable()` 
+
+```{r}
+mtcars %>% DT::datatable(
+    extensions = "AutoFill", 
+    options = list(
+        autoFill = list(columns = c(1, 2, 3), focus = "click")
+    )
+)
+```
+
+----------
+
+# Buttons
+
+See https://rstudio.github.io/DT/extensions.html (setion *1. AutoFill*)
+
+## Default
+
+```{r}
+dt_bundle_buttons()
+```
+
+```{r}
+mtcars %>% datatable2(bundles = dt_bundle_buttons())
+```
+
+```{r}
+mtcars %>% datatable2(bundles = dt_bundle_buttons_de())
+```
+
+```{r}
+mtcars %>% datatable2(bundles = dt_bundle_buttons_en())
+```
+
+## Custom options
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_buttons(buttons = c("copy", "pdf"))
+)
+mtcars %>% datatable2(
+    bundles = dt_bundle_buttons("copy", "pdf")
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_buttons_de("copy", "pdf")
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_buttons_en("copy", "pdf")
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_buttons(
+        .options = list(
+            buttons = c("copy", "csv")
+        )
+    )
+)
+```
+
+For comparison when calling `DT::datatable()` 
+
+```{r}
+mtcars %>% DT::datatable(
+    extensions = "Buttons", 
+    options = list(
+        dom = "Bfrtip",
+        buttons = list(
+            "copy",
+            "print", 
+            list(
+                extend = "collection",
+                buttons = c("csv", "excel", "pdf"),
+                text = "Download"
+            )
+        )
+    )
+)
+```
+
+----------
+
+# ColReorder
+
+See https://rstudio.github.io/DT/extensions.html (setion *3. ColReorder*)
+
+## Default
+
+```{r}
+dt_bundle_colreorder()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_colreorder(.verbose = TRUE)
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_colreorder(realtime = TRUE)
+```
+
+```{r}
+dt_bundle_colreorder(.options = list(realtime = TRUE))
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_colreorder(realtime = TRUE)
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_colreorder(
+        .options = list(realtime = TRUE)
+    )
+)
+```
+
+----------
+
+# FixedColumns
+
+See https://rstudio.github.io/DT/extensions.html (setion *5. FixedColumns*) and
+https://datatables.net/reference/option/fixedColumns.leftColumns
+
+When a table is too wide, you can fix certain columns (e.g. the left and/or the
+right column) using the FixedColumns extension so that they will be visible when
+you scroll the table horizontally.
+
+## Default
+
+```{r}
+dt_bundle_fixedcolumns()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_fixedcolumns()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_fixedcolumns(left = 2)
+dt_bundle_fixedcolumns(left = "cyl", .data = mtcars)
+dt_bundle_fixedcolumns(left = "carb", .data = mtcars)
+dt_bundle_fixedcolumns(left = "mpg", right = "gear", .data = mtcars)
+dt_bundle_fixedcolumns(.options = list(left = 2, right = 1))
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_fixedcolumns(left = 2)
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_fixedcolumns(left = 1, right = 1)
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_fixedcolumns(
+        left = "mpg", right = "gear", .data = mtcars
+    )
+)
+```
+
+Custom `.options` object
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_fixedcolumns(
+        .options = list(left = 2, right = 1)
+    )
+)
+```
+
+----------
+
+# FixedHeader
+
+See https://rstudio.github.io/DT/extensions.html (setion *6. FixedHeader*)
+
+You may want the table header to be always visible when scrolling down the table, and you can use the FixedHeader extension in this case.
+
+## Default
+
+```{r}
+dt_bundle_fixedheader()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_fixedheader()
+)
+mtcars %>% datatable2(
+    bundles = dt_bundle_fixedheader(fixedHeader = FALSE)
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_fixedheader(fixedHeader = FALSE)
+dt_bundle_fixedheader(pageLength = 10)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_fixedheader(pageLength = 15)
+)
+```
+
+Custom `.options` object
+
+```{r}
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_fixedheader(
+        .options = list(fixedHeader = TRUE)
+    )
+)
+mtcars %>% dplyr::bind_rows(mtcars) %>% 
+    dplyr::add_rownames() %>% 
+    datatable2(
+    bundles = dt_bundle_fixedheader(
+        .options = list(fixedHeader = TRUE)
+    )
+)
+```
+
+----------
+
+# Combine bundles
+
+```{r}
+mtcars %>% datatable2(
+    bundles = list(
+        dt_bundle_fixedcolumns(), 
+        dt_bundle_buttons())
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundle = c("FixedColumns", "Buttons")
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = list(
+        dt_bundle_fixedcolumns(left = 2, right = 1), 
+        dt_bundle_buttons(
+            .options = list("copy", "csv")
+        )
+    )
+)
+```
+
+-----
+
+# Available bundles
+
+-----
+
+# Processing bundles
+
+```{r}
+dt_bundle_autofill() %>% dt_process_bundles()
+
+list(
+    dt_bundle_autofill(), 
+    dt_bundle_fixedcolumns(),
+    dt_bundle_buttons()
+) %>% 
+    dt_process_bundles()
+```
