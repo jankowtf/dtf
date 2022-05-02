@@ -1,7 +1,8 @@
 ---
-output: github_document
+output: 
+    github_document
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -14,6 +15,7 @@ knitr::opts_chunk$set(
     out.width = "100%",
     eval = TRUE
 )
+devtools::load_all(".")
 ```
 
 # dti
@@ -44,4 +46,76 @@ remotes::install_github("rappster/dti")
 
 ```{r, eval=FALSE}
 library(dti)
+```
+
+### Bundle `AutoFill`
+
+#### Default
+
+See https://rstudio.github.io/DT/extensions.html (setion *1. AutoFill*)
+
+With the AutoFill extension, you will see a blue square in the bottom-right corner of a cell when you mouse over the cell. You can drag it to automatically fill the column.
+
+```{r}
+mtcars %>% datatable2(bundle = dt_bundle_autofill())
+```
+
+```{r}
+mtcars %>% datatable2(bundle = "AutoFill")
+```
+
+#### Custom options
+
+For comparison when calling `DT::datatable()` 
+
+```{r}
+mtcars %>% DT::datatable(
+    extensions = "AutoFill", 
+    options = list(
+        autoFill = TRUE
+    )
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_autofill(columns = c(1, 2, 3))
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_autofill(columns = c(1, 2, 3), focus = "click")
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_autofill(
+        columns = c("mpg", "disp"), 
+        focus = "click",
+        .data = mtcars
+    )
+)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = list(
+        dt_bundle_autofill(
+            .options = list(columns = c(1, 2, 3), focus = "click")
+        )
+    )
+)
+```
+
+For comparison when calling `DT::datatable()` 
+
+```{r}
+mtcars %>% DT::datatable(
+    extensions = "AutoFill", 
+    options = list(
+        autoFill = list(columns = c(1, 2, 3), focus = "click")
+    )
+)
 ```

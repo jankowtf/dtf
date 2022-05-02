@@ -117,7 +117,7 @@ dt_bundle_autofill <- function(
             option_name = option_name
         )
         if (.verbose) {
-            logger::log_trace("Bundle: autofill")
+            logger::log_trace("Bundle: {extension}")
             logger::log_eval(bundle)
         }
         return(bundle)
@@ -127,7 +127,7 @@ dt_bundle_autofill <- function(
         columns = lookup_column_positions(
             data = .data,
             columns = columns,
-            no_offset = TRUE
+            offset = FALSE
         ),
         focus = focus,
         .option_name = option_name,
@@ -145,7 +145,7 @@ dt_bundle_autofill <- function(
     )
 
     if (.verbose) {
-        logger::log_trace("Bundle: autofill")
+        logger::log_trace("Bundle: {extension}")
         logger::log_eval(bundle)
     }
 
@@ -452,7 +452,7 @@ dt_bundle_colreorder <- function(
     )
 
     if (.verbose) {
-        logger::log_trace("Bundle: autofill")
+        logger::log_trace("Bundle: {extension}")
         logger::log_eval(bundle)
     }
 
@@ -514,18 +514,17 @@ dt_bundle_fixedcolumns <- function(
     )
 
     if (.verbose) {
-        logger::log_trace("Bundle: autofill")
+        logger::log_trace("Bundle: {extension}")
         logger::log_eval(bundle)
     }
 
     bundle
 }
 
-
-
 #' DT bundle: `FixedHeader`
 #'
-#' See https://datatables.net/reference/option/
+#' See https://datatables.net/extensions/fixedheader/ and
+#' https://datatables.net/reference/option/fixedHeader
 #'
 #' @param fixedHeader [[logical]] Enable fixed header yes/no
 #' @param pageLength [[integer]] Page length option
@@ -544,22 +543,6 @@ dt_bundle_fixedheader <- function(
     extension <- dt_extensions("FixedHeader")
     option_name <- dt_options("fixedHeader", extension = extension)
 
-    # Unspecified vs. specified options
-    # .options <- if (!length(.options)) {
-    #     c(
-    #         list(pageLength = pageLength),
-    #         fixedHeader = fixedHeader
-    #     )
-    # } else {
-    #     c(
-    #         list(pageLength = pageLength),
-    #         # list(.options) %>%
-    #         #     purrr::set_names(
-    #         #         dt_options("fixedHeader", extension = extension)
-    #         #     )
-    #         .options
-    #     )
-    # }
     extension_options <- compose_extension_options(
         fixedHeader,
         .option_name = option_name,
@@ -578,12 +561,448 @@ dt_bundle_fixedheader <- function(
     )
 
     if (.verbose) {
-        logger::log_trace("Bundle: autofill")
+        logger::log_trace("Bundle: {extension}")
         logger::log_eval(bundle)
     }
 
     bundle
 }
+
+#' DT bundle: `KeyTable`
+#'
+#' Not fully compliant with full DataTables functionality.
+#'
+#' See https://datatables.net/extensions/keytable/ and
+#' https://datatables.net/reference/option/keys
+#'
+#' TODO: Add remaining options
+#'
+#' @param keys [[logical]] Use KeyTable extension yes/no
+#' @param .options [[list]] Object to pass custom options for this extension
+#'   beyond pre-defined arguments
+#' @param .verbose [[logical]] Log tracing messages yes/no
+#'
+#' @return
+#' @export
+dt_bundle_keytable <- function(
+    keys = TRUE,
+    .options = list(),
+    .verbose = FALSE
+) {
+    extension <- dt_extensions("KeyTable")
+    option_name <- dt_options("keys", extension = extension)
+
+    extension_options <- compose_extension_options(
+        keys,
+        .option_name = option_name,
+        .extension_options = .options,
+        .unlist = TRUE
+    )
+
+    options <- compose_options(
+        .extension_options = extension_options
+    )
+
+    bundle <- compose_bundle(
+        extensions = extension,
+        options = options
+    )
+
+    if (.verbose) {
+        logger::log_trace("Bundle: {extension}")
+        logger::log_eval(bundle)
+    }
+
+    bundle
+}
+
+#' DT bundle: `Responsive`
+#'
+#' Not fully compliant with full DataTables functionality.
+#'
+#' See https://datatables.net/extensions/responsive/ and
+#' https://datatables.net/reference/option/responsive
+#'
+#' TODO: Add remaining options
+#'
+#' @param responsive [[logical]] Use KeyTable extension yes/no
+#' @param .options [[list]] Object to pass custom options for this extension
+#'   beyond pre-defined arguments
+#' @param .verbose [[logical]] Log tracing messages yes/no
+#'
+#' @param responsive
+#' @param .options
+#' @param .verbose
+#'
+#' @return
+#' @export
+dt_bundle_responsive <- function(
+    responsive = TRUE,
+    .options = list(),
+    .verbose = FALSE
+) {
+    extension <- dt_extensions("Responsive")
+    option_name <- dt_options("responsive", extension = extension)
+
+    extension_options <- compose_extension_options(
+        responsive,
+        .option_name = option_name,
+        .extension_options = .options,
+        .unlist = TRUE
+    )
+
+    options <- compose_options(
+        .extension_options = extension_options
+    )
+
+    bundle <- compose_bundle(
+        extensions = extension,
+        options = options
+    )
+
+    if (.verbose) {
+        logger::log_trace("Bundle: {extension}")
+        logger::log_eval(bundle)
+    }
+
+    bundle
+}
+
+#' DT bundle: `RowGroup`
+#'
+#' Not fully compliant with full DataTables functionality.
+#'
+#' See https://datatables.net/extensions/rowgroup/ and
+#' https://datatables.net/reference/option/rowGroup
+#'
+#' TODO: Add remaining options
+#'
+#' @param dataSrc [[integer]] Position or name of column to use as grouping
+#'   column.
+#' @param .options [[list]] Object to pass custom options for this extension
+#'   beyond pre-defined arguments
+#' @param .verbose [[logical]] Log tracing messages yes/no
+#'
+#' @return
+#' @export
+dt_bundle_rowgroup <- function(
+    dataSrc = 1,
+    .options = list(),
+    .data = tibble::tibble(),
+    .verbose = FALSE
+) {
+    extension <- dt_extensions("RowGroup")
+    option_name <- dt_options("rowGroup", extension = extension)
+
+    # Handle position lookup if data is  provided
+    dataSrc <- dataSrc %>% lookup_column_positions(data = .data, offset = FALSE)
+
+    extension_options <- compose_extension_options(
+        dataSrc = dataSrc,
+        .option_name = option_name,
+        .extension_options = .options
+    )
+
+    options <- compose_options(
+        .extension_options = extension_options
+    )
+
+    bundle <- compose_bundle(
+        extensions = extension,
+        options = options,
+        selection = "none"
+    )
+
+    if (.verbose) {
+        logger::log_trace("Bundle: {extension}")
+        logger::log_eval(bundle)
+    }
+
+    bundle
+}
+
+#' DT bundle: `RowReorder`
+#'
+#' Not fully compliant with full DataTables functionality.
+#'
+#' See https://datatables.net/extensions/rowreorder/ and
+#' https://datatables.net/reference/option/rowReorder
+#'
+#' TODO: Add remaining options
+#'
+#' @param rowReorder [[logical]] Use RowReorder extension yes/no
+#' @param .options [[list]] Object to pass custom options for this extension
+#'   beyond pre-defined arguments
+#' @param .verbose [[logical]] Log tracing messages yes/no
+#'
+#' @return
+#' @export
+dt_bundle_rowreorder <- function(
+    rowReorder = TRUE,
+    .options = list(),
+    .verbose = FALSE
+) {
+    extension <- dt_extensions("RowReorder")
+    option_name <- dt_options("rowReorder", extension = extension)
+
+    extension_options <- compose_extension_options(
+        rowReorder,
+        .option_name = option_name,
+        .extension_options = .options,
+        .unlist = TRUE
+    )
+
+    options <- compose_options(
+        order = list(c(0 , 'asc')),
+        .extension_options = extension_options
+    )
+
+    bundle <- compose_bundle(
+        extensions = extension,
+        options = options
+    )
+
+    if (.verbose) {
+        logger::log_trace("Bundle: {extension}")
+        logger::log_eval(bundle)
+    }
+
+    bundle
+}
+
+#' DT bundle: `Scroller`
+#'
+#' Not fully compliant with full DataTables functionality.
+#'
+#' See https://datatables.net/extensions/scroller/ and
+#' https://datatables.net/reference/option/scroller
+#'
+#' TODO: Add remaining options
+#'
+#' @param scroller [[logical]] Use extension yes/no
+#' @param deferRender [[logical]] Defer rendering yes/no
+#' @param scrollY [[integer]] Vertical scrolling space
+#' @param .options [[list]] Object to pass custom options for this extension
+#'   beyond pre-defined arguments
+#' @param .verbose [[logical]] Log tracing messages yes/no
+#'
+#' @return
+#' @export
+dt_bundle_scroller <- function(
+    scroller = TRUE,
+    deferRender = TRUE,
+    scrollY = 200,
+    .options = list(),
+    .verbose = FALSE
+) {
+    extension <- dt_extensions("Scroller")
+    option_name <- dt_options("scroller", extension = extension)
+
+    extension_options <- compose_extension_options(
+        scroller,
+        .option_name = option_name,
+        .extension_options = .options,
+        .unlist = TRUE
+    )
+
+    options <- compose_options(
+        deferRender = deferRender,
+        scrollY = scrollY,
+        .extension_options = extension_options
+    )
+
+    bundle <- compose_bundle(
+        extensions = extension,
+        options = options
+    )
+
+    if (.verbose) {
+        logger::log_trace("Bundle: {extension}")
+        logger::log_eval(bundle)
+    }
+
+    bundle
+}
+
+#' DT bundle: `SearchPanes`
+#'
+#'
+#' Not fully compliant with full DataTables functionality.
+#'
+#' See https://datatables.net/extensions/searchpanes/ and
+#' https://datatables.net/reference/option/searchPanes
+#'
+#' TODO: Add remaining options
+#'
+#' @param .options [[list]] Object to pass custom options for this extension
+#'   beyond pre-defined arguments
+#' @param .verbose [[logical]] Log tracing messages yes/no
+#'
+#' @return
+#' @export
+dt_bundle_searchpanes <- function(
+    show = FALSE,
+    targets = 1L,
+    .options = list(),
+    .data = tibble::tibble(),
+    .verbose = FALSE
+) {
+    if (length(.options)) {
+        stop("Use of '.options' not supported yet.")
+    }
+
+    extension_sp <- dt_extensions("SearchPanes")
+    option_name_sp <- dt_options("searchPanes", extension = extension_sp)
+
+    extension_s <- dt_extensions("Select")
+    option_name_s <- dt_options("select", extension = extension_s)
+
+    extensions <- c(extension_sp, extension_s)
+
+    extension_options <- compose_extension_options(
+        show = show,
+        .option_name = option_name_sp,
+        .extension_options = .options
+    )
+
+    # Handle position lookup if data is provided
+    targets <- targets %>% lookup_column_positions(data = .data,
+        negate = TRUE, offset = FALSE)
+
+    column_def_options <- compose_extension_options(
+        c(
+            extension_options,
+            list(targets = targets)
+        ),
+        .option_name = "columnDefs",
+        .extension_options = .options
+    )
+
+    options <- compose_options(
+        # dom = "Pfrtip",
+        dom = dt_bundle_dom(P = TRUE, standalone = TRUE),
+        # .extension_options = extension_options
+        .extension_options = column_def_options
+    )
+
+    bundle <- compose_bundle(
+        extensions = extensions,
+        options = options,
+        selection = "none"
+    )
+
+    if (.verbose) {
+        logger::log_trace("Bundle: {extensions}")
+        logger::log_eval(bundle)
+    }
+
+    bundle
+    # list(
+    #     extensions = dt_extensions('Select', 'SearchPanes'),
+    #     options = list(
+    #         dom = dt_bundle_dom(P = TRUE),
+    #         columnDefs = list(list(
+    #             searchPanes = list(show = FALSE),
+    #             targets = 1:4
+    #         ))
+    #     ),
+    #     selection = "none"
+    # )
+}
+
+#' DT bundle: `Select` with `Buttons`
+#'
+#' Not fully compliant with full DataTables functionality.
+#'
+#' See https://datatables.net/extensions/searchpanes/ and
+#' https://datatables.net/reference/option/searchPanes
+#'
+#' TODO: Add remaining options
+#'
+#' @param .options [[list]] Object to pass custom options for this extension
+#'   beyond pre-defined arguments
+#' @param .verbose [[logical]] Log tracing messages yes/no
+#'
+#' @return
+#' @export
+dt_bundle_select <- function(
+    ...,
+    style = "os",
+    items = "row",
+    selection = "none",
+    .options = list(),
+    .verbose = FALSE,
+    .buttons = valid_dt_options_buttons_select_names(),
+    .as_is = FALSE,
+    .flatten = FALSE
+) {
+    list(
+        extensions = dt_extensions('Select', 'Buttons'),
+        select = list(
+            style = 'os',
+            items = 'row'
+        ),
+        dom = 'Blfrtip',
+        rowId = 0,
+        buttons = c(
+            'selectAll',
+            'selectNone',
+            'selectRows',
+            'selectColumns',
+            'selectCells'
+        ),
+        selection = "none"
+    )
+
+    extension_select <- dt_extensions("Select")
+    option_name_select <- dt_options("select", extension = extension_select)
+
+    buttons <- if (!length(.btns <- rlang::list2(...))) {
+        .buttons
+    } else {
+        .btns
+    }
+
+    buttons %>% unlist() %>% valid_dt_options_buttons_select_names()
+
+    extension_buttons <- dt_extensions("Buttons")
+    option_name_buttons <- dt_options("buttons", extension = extension_buttons)
+
+    extension_options_select <- compose_extension_options(
+        style = style,
+        items = items,
+        .option_name = option_name_select,
+        .extension_options = .options
+    )
+
+    extension_options_buttons <- compose_extension_options(
+        buttons,
+        .option_name = option_name_buttons,
+        .extension_options = .options,
+        .unlist = !.as_is
+    )
+
+    options <- compose_options(
+        dom = dt_bundle_dom(B = TRUE, standalone = TRUE),
+        rowId = 0,
+        .extension_options = c(
+            extension_options_buttons,
+            extension_options_select
+        )
+    )
+
+    bundle <- compose_bundle(
+        extensions = c(extension_select, extension_buttons),
+        options = options,
+        selection = selection
+    )
+
+    bundle
+}
+
+# Other -------------------------------------------------------------------
+
+
 
 #' DT bundle: bundle `initComplete`
 #'
@@ -633,144 +1052,6 @@ dt_bundle_lengthmenue <- function(
             pageLength = pageLength,
             lengthMenu = list(c(15, 50, 100, -1), c("15", "50", "100", "All"))
         )
-    )
-}
-
-#' DT bundle: `KeyTable`
-#'
-#' See https://datatables.net/reference/option/
-#'
-#' @return
-#' @export
-dt_bundle_keytable <- function() {
-    list(
-        extensions = dt_extensions("KeyTable"),
-        options = list(
-            keys = TRUE
-        )
-    )
-}
-
-#' DT bundle: `Responsive`
-#'
-#' See https://datatables.net/reference/option/
-#'
-#' @return
-#' @export
-dt_bundle_responsive <- function() {
-    list(
-        extensions = dt_extensions("Responsive")
-    )
-}
-
-#' DT bundle: `RowGroup`
-#'
-#' See https://datatables.net/reference/option/
-#'
-#' @param dataSrc [?]
-#'
-#' @return
-#' @export
-dt_bundle_rowgroup <- function(dataSrc = 1) {
-    list(
-        extensions = dt_extensions("RowGroup"),
-        options = list(
-            rowGroup = list(
-                dataSrc = dataSrc
-                # TODO: Add remaining options. E.g. see
-                # https://datatables.net/reference/option/rowGroup.emptyDataGroup and
-                # other 'RowGroup' options at https://datatables.net/reference/option/
-            )
-        ),
-        selection = "none"
-    )
-}
-
-#' DT bundle: `RowReorder`
-#'
-#' See https://datatables.net/reference/option/
-#'
-#' @return
-#' @export
-dt_bundle_rowreorder <- function() {
-    list(
-        extensions = dt_extensions("RowReorder"),
-        options = list(
-            rowReorder = TRUE,
-            order = list(c(0 , 'asc'))
-        )
-    )
-}
-
-#' DT bundle: `Scroller`
-#'
-#' See https://datatables.net/reference/option/
-#'
-#' @param deferRender [?]
-#' @param scrollY [?]
-#' @param scroller [?]
-#'
-#' @return
-#' @export
-dt_bundle_scroller <- function(
-    deferRender = TRUE,
-    scrollY = 200,
-    scroller = TRUE
-) {
-    extension <- dt_extensions("Scroller")
-    list(
-        extensions = extension,
-        options = list(
-            deferRender = deferRender,
-            scrollY = scrollY,
-            scroller = scroller
-        )
-    )
-}
-
-#' DT bundle: `SearchPanes`
-#'
-#' See https://datatables.net/reference/option/
-#'
-#' @return
-#' @export
-dt_bundle_searchpanes <- function() {
-    list(
-        extensions = dt_extensions('Select', 'SearchPanes'),
-        options = list(
-            dom = 'Pfrtip',
-            columnDefs = list(list(
-                searchPanes = list(show = FALSE),
-                targets = 1:4
-            ))
-        ),
-        selection = "none"
-    )
-}
-
-#' DT bundle: `Select` with `Buttons`
-#'
-#' See https://datatables.net/reference/option/
-#'
-#' @return
-#' @export
-dt_bundle_select_buttons <- function() {
-    list(
-        extensions = dt_extensions('Select', 'Buttons'),
-        select = list(
-            style = 'os',
-            items = 'row'
-        ),
-        dom = 'Blfrtip',
-        rowId = 0,
-        buttons = c(
-            'selectAll',
-            'selectNone',
-            'selectRows',
-            'selectColumns',
-            'selectCells'
-        ),
-        selection = "none"
     )
 }
 

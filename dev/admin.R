@@ -9,6 +9,8 @@ renv::install("rmarkdown")
 renv::install("here")
 
 renv::install("dplyr")
+renv::install("webshot")
+webshot::install_phantomjs()
 
 # Dev preps ---------------------------------------------------------------
 
@@ -56,6 +58,7 @@ renv::install("rappster/valid", rebuild = TRUE)
 renv::install("rappster/confx")
 renv::install("rappster/drop", rebuild = TRUE)
 renv::install("assertthat")
+renv::install("assertr")
 renv::install("logger")
 renv::install("snakecase")
 
@@ -64,6 +67,7 @@ usethis::use_package("DT")
 usethis::use_dev_package("valid", type = "Imports", remote = "rappster/valid")
 usethis::use_dev_package("confx", type = "Imports", remote = "rappster/confx")
 usethis::use_package("assertthat")
+usethis::use_package("assertr")
 usethis::use_package("logger")
 usethis::use_package("snakecase")
 usethis::use_dev_package("drop", type = "Imports", remote = "rappster/drop")

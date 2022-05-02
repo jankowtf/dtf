@@ -307,9 +307,6 @@ dt_bundle_fixedheader()
 mtcars %>% datatable2(
     bundles = dt_bundle_fixedheader()
 )
-mtcars %>% datatable2(
-    bundles = dt_bundle_fixedheader(fixedHeader = FALSE)
-)
 ```
 
 ## Custom options
@@ -340,6 +337,355 @@ mtcars %>% dplyr::bind_rows(mtcars) %>%
     bundles = dt_bundle_fixedheader(
         .options = list(fixedHeader = TRUE)
     )
+)
+```
+
+----------
+
+# KeyTable
+
+See https://rstudio.github.io/DT/extensions.html (setion *7. KeyTable*)
+
+The KeyTable extension provides the ability of navigating through the table like Excel: a cell is highlighted by a box, and you can move around using the arrow keys (Left/Right/Up/Down).
+
+## Default
+
+```{r}
+dt_bundle_keytable()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_keytable()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_keytable(keys = FALSE)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_keytable(keys = FALSE)
+)
+```
+
+Custom `.options` object
+
+```{r}
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_keytable(
+        .options = list(keys = FALSE)
+    )
+)
+```
+
+----------
+
+# Responsive
+
+See https://rstudio.github.io/DT/extensions.html (setion *8. Responsive*)
+
+The Responsive extension makes the table columns responsive in the sense that when the page is too narrow, certain columns can be automatically collapsed and hidden. In the example below, as you decrease the page width, you will see a sequence of columns collapsed and a button appear on the left. You can click the button to expand the data of the hidden columns behind it.
+
+## Default
+
+```{r}
+dt_bundle_responsive()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_responsive()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_responsive(responsive = FALSE)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_responsive(responsive = FALSE)
+)
+```
+
+Custom `.options` object
+
+```{r}
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_responsive(
+        .options = list(responsive = FALSE)
+    )
+)
+```
+
+----------
+
+# RowGroup
+
+See https://rstudio.github.io/DT/extensions.html (setion *9. RowGroup*)
+
+The RowGroup extension provides an easy way to use the row grouping feature. In the example below, cyl (number of cylinders) is used as the row group column and its value is displayed as the row group label.
+
+## Default
+
+```{r}
+dt_bundle_rowgroup()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_rowgroup()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_rowgroup(dataSrc = 2)
+dt_bundle_rowgroup(dataSrc = "mpg", .data = mtcars)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_rowgroup(dataSrc = 2)
+)
+mtcars %>% datatable2(
+    bundles = dt_bundle_rowgroup(dataSrc = "disp", .data = mtcars)
+)
+```
+
+Custom `.options` object
+
+```{r}
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_rowgroup(
+        .options = list(dataSrc = 2)
+    )
+)
+```
+
+----------
+
+# RowReorder
+
+See https://rstudio.github.io/DT/extensions.html (setion *10. RowReorder*)
+
+The RowReorder extension allows you to drag and reorder a certain row in the table. Note the first column ID is not changed when you reorder the rows in the example below, which can be a little confusing.
+
+## Default
+
+```{r}
+dt_bundle_rowreorder()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_rowreorder()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_rowreorder(rowReorder = FALSE)
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_rowreorder(rowReorder = FALSE)
+)
+```
+
+Custom `.options` object
+
+```{r}
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_rowreorder(
+        .options = list(rowReorder = FALSE)
+    )
+)
+```
+
+----------
+
+# Scroller
+
+See https://rstudio.github.io/DT/extensions.html (setion *11. Scroller*)
+
+When the table has a large number of rows, you may not want to render all rows on the page immediately since it will be slow. The Scroller extension makes it possible to only render the visible portion of the table.
+
+## Default
+
+```{r}
+dt_bundle_scroller()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_scroller()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_scroller(scrollY = 100)
+```
+
+```{r}
+mtcars %>% dplyr::add_rownames() %>% 
+    datatable2(
+    bundles = dt_bundle_scroller(scrollY = 100)
+)
+```
+
+Custom `.options` object
+
+```{r}
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_scroller(
+        .options = list(scroller = FALSE)
+    )
+)
+```
+
+----------
+
+# SearchPanes
+
+See https://rstudio.github.io/DT/extensions.html (setion *12. SearchPanes*)
+
+The SearchPanes extension is a new extension that adds panes to the DataTable with the capability to search the DataTable by selecting rows in the panes. As documented in the realsing blog, it doesn’t support the server-side processing mode. Since it depends on the Select extension, you are expected to always include the Select extension with SearchPanes. In addition, in order to display the search panes, you need to insert P to the dom option.
+
+## Default
+
+```{r}
+dt_bundle_searchpanes()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_searchpanes()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_searchpanes(targets = 1:4)
+dt_bundle_searchpanes(targets = "mpg", .data = mtcars)
+```
+
+```{r}
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_searchpanes(targets = 1:10)
+)
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_searchpanes(targets = 11)
+)
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_searchpanes(targets = "carb", .data = mtcars, .verbose = TRUE)
+)
+```
+
+Custom `.options` object 
+
+```{r}
+try(mtcars %>%
+    datatable2(
+    bundles = dt_bundle_searchpanes(
+        .options = list(show = FALSE)
+    )
+))
+```
+
+```{r}
+mtcars %>% DT::datatable(
+  extensions = c('Select', 'SearchPanes'),
+  options = list(dom = 'Pfrtip', columnDefs = list(list(
+    searchPanes = list(show = FALSE), 
+      targets = 1:10
+      # targets = c(1:2, 5)
+  ))),
+  selection = 'none'
+)
+```
+
+----------
+
+# Select
+
+The Select extension allows the user to perform item selections in DataTable. It supports three different selection styles including os(Operating system), single(Single item select) and multiple(Multi-item selection) and has built-in button types for the Buttons extension allowing select all / none and other actions to be performed very easily. However, it only works well in the client-side processing mode, i.e., DT::renderDT(..., server = FALSE). Note that you need to turn off DT’s own select functionality by setting selection = 'none' when you want to use the Select extension in shiny.
+
+DT also has its own implementation of row/column/cell selections in Shiny (see the selection param in ?DT::datatable), which is different from the Select extension. In particular, it only supports Shift/Ctrl + Click for selecting multiple rows at the time of writing (see #305 for an example). On the other hand, DT’s implementation supports both client and server-side processing mode.
+
+## Default
+
+```{r}
+dt_bundle_select()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_select()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_select("selectRows", "selectColumns")
+```
+
+```{r}
+mtcars %>%
+    datatable2(
+    bundles = dt_bundle_select("selectRows", "selectColumns", "selectCells")
+)
+```
+
+Custom `.options` object 
+
+```{r}
+try(mtcars %>%
+    datatable2(
+    bundles = dt_bundle_select(
+        .options = list()
+    )
+))
+# TODO: provide example for ':options'
+```
+
+```{r}
+mtcars %>% DT::datatable(
+    extensions = c('Select', 'Buttons'), 
+    options = list(
+        select = list(style = 'os', items = 'row'),
+        dom = 'Blfrtip',
+        rowId = 0,
+        buttons = c(
+            'selectAll', 
+            'selectNone', 
+            'selectRows', 
+            'selectColumns', 
+            'selectCells'
+        )
+    ),
+    selection = 'none'
 )
 ```
 

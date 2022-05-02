@@ -66,16 +66,18 @@ compose_options <- function(
     )
 }
 
-
 compose_bundle <- function(
     extensions,
     options = list(TRUE) %>% purrr::set_names(option_name),
+    selection = NULL,
     option_name
 ) {
     list(
         extensions = extensions,
-        options = options
-    )
+        options = options,
+        selection = selection
+    ) %>%
+        drop::drop_null()
 }
 
 #' Transfer explicit DT options
@@ -104,4 +106,72 @@ has_names <- function(x) {
             .x %>% names() %>% purrr::negate(is.null)()
         }
     })
+}
+
+# Lookup column positions -------------------------------------------------
+
+#' Lookup column positions
+#'
+#' @param columns ([character] but also handles [integer] gracefully) Column
+#'   names (or positions)
+#' @param data ([tibble::tibble]) Data in which to look for column names
+#' @param reverse [[logical]] Reverse column names yes/no. Necessary for
+#'   "right-hand" logic
+#' @param offset [[logical]]
+#' @param negate [[logical]]
+#'
+#' @return ([integer])
+#'
+#' @examples
+#' lookup_column_positions("cyl", mtcars)
+#' lookup_column_positions("cyl", mtcars, offset = FALSE)
+#' lookup_column_positions("carb", mtcars, reverse = TRUE)
+lookup_column_positions <- function(
+    columns,
+    data,
+    reverse = FALSE,
+    offset = TRUE,
+    negate = FALSE
+) {
+    # Early exit for bad combination
+    if (!nrow(data) && inherits(columns, "character")) {
+        stop("Bad combination: column names but no data")
+    }
+
+    # Early exit for integer values
+    if (!nrow(data)) {
+        return(columns)
+    }
+
+    names <- names(data)
+
+    names <- if (reverse) {
+        offset <- FALSE
+        rev(names)
+    } else {
+        names
+    }
+
+    # DT treats rownames as separate column -> work with offset
+    offset <- ifelse(!offset, 0, ifelse(is.null(data %>% rownames()), 0, 1))
+
+    # index_left <- which(names == left)
+    index <- columns %>% purrr::map(~which(names == .x)) %>%
+        unlist()
+
+    index_full <- 1:length(names)
+
+
+    out <- as.integer(
+        if (length(index)) {
+            index <- if (negate) {
+                index_full[!(index_full %in% index)]
+            } else {
+                index
+            }
+            index + offset
+        } else {
+            columns
+        }
+    )
 }

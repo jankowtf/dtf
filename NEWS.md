@@ -1,3 +1,9 @@
+# dti 0.0.0.9002 (2022-05-02)
+
+Refactored bundle code
+
+----------
+
 # dti 0.0.0.9001 (2022-04-25)
 
 Renamed to 'dti'

@@ -1,6 +1,6 @@
-# Bundle: autofill --------------------------------------------------------
+# autofill --------------------------------------------------------
 
-test_that("Bundle: autofill", {
+test_that("autofill", {
     result <- dt_bundle_autofill()
     expectation <- list(extensions = "AutoFill",
         options = list(autoFill = TRUE))
@@ -113,9 +113,9 @@ test_that("Bundle: autofill", {
     # expect_equal(result, expectation, ignore_attr = TRUE)
 })
 
-# Bundle: buttons ---------------------------------------------------------
+# buttons ---------------------------------------------------------
 
-test_that("Bundle: buttons", {
+test_that("buttons", {
     result <- dt_bundle_buttons()
     expectation <- list(
         extensions = "Buttons",
@@ -156,7 +156,7 @@ test_that("Bundle: buttons", {
     expect_identical(result, expectation)
 })
 
-test_that("Bundle: buttons: en", {
+test_that("buttons: en", {
     result <- dt_bundle_buttons_en()
     expectation <- list(extensions = "Buttons", options = list(dom = "BRSfilprt",
         buttons = list(list(extend = "colvis", text = "Columns"),
@@ -176,7 +176,7 @@ test_that("Bundle: buttons: en", {
     expect_identical(result, expectation)
 })
 
-test_that("Bundle: buttons: de", {
+test_that("buttons: de", {
     result <- dt_bundle_buttons_de()
     expectation <- list(extensions = "Buttons", options = list(dom = "BRSfilprt",
         buttons = list(list(extend = "colvis", text = "Spalten"),
@@ -197,9 +197,9 @@ test_that("Bundle: buttons: de", {
     expect_identical(result, expectation)
 })
 
-# Bundle: colreorder ------------------------------------------------------
+# colreorder ------------------------------------------------------
 
-test_that("Bundle: colreorder", {
+test_that("colreorder", {
     result <- dt_bundle_colreorder()
     expectation <- list(
         extensions = c(ColReorder = "ColReorder") %>% unname(),
@@ -208,7 +208,9 @@ test_that("Bundle: colreorder", {
     expect_identical(result, expectation)
 })
 
-test_that("Bundle: fixedcolumns", {
+# fixedcolumns ----------------------------------------------------
+
+test_that("fixedcolumns", {
     result <- dt_bundle_fixedcolumns()
     expectation <- list(extensions = "FixedColumns", options = list(
         scrollX = TRUE, fixedColumns = list(left = 1L)
@@ -225,14 +227,113 @@ test_that("Bundle: fixedcolumns", {
     expect_identical(result, expectation)
 })
 
-test_that("Bundle: fixedheader", {
+# fixedheader -----------------------------------------------------
+
+test_that("fixedheader", {
     result <- dt_bundle_fixedheader()
     expectation <- list(extensions = "FixedHeader", options = list(
         pageLength = 50, fixedHeader = TRUE))
     expect_identical(result, expectation)
 })
 
-test_that("Bundle: internationalization", {
+# keytable --------------------------------------------------------
+
+test_that("keytable", {
+    result <- dt_bundle_keytable()
+    expectation <- list(extensions = "KeyTable",
+        options = list(keys = TRUE))
+    expect_identical(result, expectation)
+})
+
+# responsive ------------------------------------------------------
+
+test_that("responsive", {
+    result <- dt_bundle_responsive()
+    expectation <- list(extensions = "Responsive", options = list(responsive = TRUE))
+    expect_identical(result, expectation)
+})
+
+# rowgroup --------------------------------------------------------
+
+test_that("rowgroup", {
+    result <- dt_bundle_rowgroup()
+    expectation <- list(
+        extensions = "RowGroup",
+        options = list(rowGroup = list(dataSrc = 1)),
+        selection = "none"
+    )
+    expect_identical(result, expectation)
+})
+
+# rowreorder ------------------------------------------------------
+
+test_that("rowreorder", {
+    result <- dt_bundle_rowreorder()
+    expectation <- list(
+        extensions = "RowReorder",
+        options = list(order = list(c("0", "asc")), rowReorder = TRUE)
+    )
+    expect_identical(result, expectation)
+})
+
+# scroller ----------------------------------------------------------------
+
+test_that("scroller", {
+    result <- dt_bundle_scroller()
+    expectation <- list(extensions = "Scroller", options = list(deferRender = TRUE,
+        scrollY = 200, scroller = TRUE))
+    expect_identical(result, expectation)
+
+    result <- dt_bundle_scroller(scrollY = 100)
+    expectation <- list(extensions = "Scroller", options = list(deferRender = TRUE,
+        scrollY = 100, scroller = TRUE))
+    expect_identical(result, expectation)
+})
+
+# searchpanes -------------------------------------------------------------
+
+test_that("searchpanes", {
+    result <- dt_bundle_searchpanes()
+    expectation <- list(extensions = c("SearchPanes", "Select"), options = list(
+        dom = "BRSfilprtP", columnDefs = list(list(searchPanes = list(
+            show = FALSE), targets = 1L))), selection = "none")
+    expect_identical(result, expectation)
+
+    result <- dt_bundle_searchpanes(targets = 1:4)
+    expectation <- list(extensions = c("SearchPanes", "Select"), options = list(
+        dom = "BRSfilprtP", columnDefs = list(list(searchPanes = list(
+            show = FALSE), targets = 1:4))), selection = "none")
+    expect_identical(result, expectation)
+
+    result <- dt_bundle_searchpanes(targets = "mpg", .data = mtcars)
+    expectation <- list(extensions = c("SearchPanes", "Select"), options = list(
+        dom = "BRSfilprtP", columnDefs = list(list(searchPanes = list(
+            show = FALSE), targets = 2:11))), selection = "none")
+    expect_identical(result, expectation)
+})
+
+# select ------------------------------------------------------------------
+
+test_that("select", {
+    result <- dt_bundle_select()
+    expectation <- list(extensions = c("Select", "Buttons"), options = list(dom = "BRSfilprt",
+        rowId = 0, buttons = c("selectAll", "selectNone", "selectRows",
+            "selectColumns", "selectCells"), select = list(style = "os",
+                items = "row")), selection = "none")
+    expect_identical(result, expectation)
+
+    result <- dt_bundle_select("selectAll", "selectNone")
+    expectation <- list(extensions = c("Select", "Buttons"), options = list(dom = "BRSfilprt",
+        rowId = 0, buttons = c("selectAll", "selectNone"), select = list(
+            style = "os", items = "row")), selection = "none")
+    expect_identical(result, expectation)
+
+    expect_error(dt_bundle_select("selectAll", "invalid"))
+})
+
+# Other -------------------------------------------------------------------
+
+test_that("internationalization", {
     result <- dt_bundle_internationalization()
     expectation <-
         list(options = list(
@@ -242,14 +343,7 @@ test_that("Bundle: internationalization", {
     expect_equal(result, expectation, ignore_attr = TRUE)
 })
 
-test_that("Bundle: keytable", {
-    result <- dt_bundle_keytable()
-    expectation <- list(extensions = "KeyTable",
-        options = list(keys = TRUE))
-    expect_identical(result, expectation)
-})
-
-test_that("Bundle: naturaljs", {
+test_that("naturaljs", {
     result <- dt_bundle_naturaljs()
     expectation <- list(
         plugins = "natural",
@@ -265,32 +359,7 @@ test_that("Bundle: naturaljs", {
     expect_identical(result, expectation)
 })
 
-test_that("Bundle: responsive", {
-    result <- dt_bundle_responsive()
-    expectation <- list(extensions = "Responsive")
-    expect_identical(result, expectation)
-})
-
-test_that("Bundle: rowgroup", {
-    result <- dt_bundle_rowgroup()
-    expectation <- list(
-        extensions = "RowGroup",
-        options = list(rowGroup = list(dataSrc = 1)),
-        selection = "none"
-    )
-    expect_identical(result, expectation)
-})
-
-test_that("Bundle: rowreorder", {
-    result <- dt_bundle_rowreorder()
-    expectation <- list(
-        extensions = "RowReorder",
-        options = list(rowReorder = TRUE, order = list(c("0", "asc")))
-    )
-    expect_identical(result, expectation)
-})
-
-test_that("Bundle: scroller", {
+test_that("scroller", {
     result <- dt_bundle_scroller()
     expectation <- list(
         extensions = "Scroller",
@@ -303,7 +372,7 @@ test_that("Bundle: scroller", {
     expect_identical(result, expectation)
 })
 
-test_that("Bundle: searchpanes", {
+test_that("searchpanes", {
     result <- dt_bundle_searchpanes()
     expectation <- list(
         extensions = c("Select", "SearchPanes"),
@@ -315,7 +384,7 @@ test_that("Bundle: searchpanes", {
     expect_identical(result, expectation)
 })
 
-test_that("Bundle: select_buttons", {
+test_that("select_buttons", {
     result <- dt_bundle_select_buttons()
     expectation <- list(
         extensions = c("Select", "Buttons"),
@@ -334,7 +403,7 @@ test_that("Bundle: select_buttons", {
     expect_identical(result, expectation)
 })
 
-test_that("Bundle: dom", {
+test_that("dom", {
     result <- dt_bundle_dom()
     expectation <- list(options = list(dom = structure("BRSfilprt")))
     expect_identical(result, expectation)

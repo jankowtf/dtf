@@ -1059,15 +1059,15 @@
     },
     "valid": {
       "Package": "valid",
-      "Version": "0.0.0.9006",
+      "Version": "0.0.0.9008",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "rappster",
       "RemoteRepo": "valid",
       "RemoteRef": "main",
-      "RemoteSha": "e2cc2c77f352fbcc8e488fe790561543e283b3f4",
-      "Hash": "0266bc7c9dde5f29251615e0f2ea5c3f",
+      "RemoteSha": "ea9ef70f95f7c105bd93f7830bf54c06a610629b",
+      "Hash": "e7add91c4bf11182eec5169681982fac",
       "Requirements": [
         "magrittr"
       ]

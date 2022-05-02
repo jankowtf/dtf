@@ -10,6 +10,13 @@ test_that("Lookup column positions", {
 
     result <- lookup_column_positions(
         data = mtcars,
+        columns = 2
+    )
+    expectation <- 2L
+    expect_identical(result, expectation)
+
+    result <- lookup_column_positions(
+        data = mtcars,
         columns = c("cyl", "hp")
     )
     expectation <- c(3L, 5L)
@@ -18,7 +25,7 @@ test_that("Lookup column positions", {
     result <- lookup_column_positions(
         data = mtcars,
         columns = "cyl",
-        no_offset = TRUE
+        offset = FALSE
     )
     expectation <- 2L
     expect_identical(result, expectation)
@@ -37,5 +44,13 @@ test_that("Lookup column positions", {
         reverse = TRUE
     )
     expectation <- 2L
+    expect_identical(result, expectation)
+
+    result <- lookup_column_positions(
+        data = mtcars,
+        columns = "mpg",
+        negate = TRUE
+    )
+    expectation <- as.integer(3:(length(mtcars) + 1))
     expect_identical(result, expectation)
 })

@@ -572,6 +572,22 @@ valid_dt_options_buttons_names <- function(
     valid::valid2(..., .choices = choices, .unname = .unname)
 }
 
+valid_dt_options_buttons_select_names <- function(
+    ...,
+    .unname = TRUE
+) {
+    choices <- c(
+        "selectAll",
+        "selectNone",
+        "selectRows",
+        "selectColumns",
+        "selectCells"
+    )
+    names(choices) <- choices
+
+    valid::valid2(..., .choices = choices, .unname = .unname)
+}
+
 #' Valid DT options for `ColReorder`
 #'
 #' See https://datatables.net/reference/option/
@@ -940,13 +956,16 @@ valid_dt_options_searchpanes <- function(
     ...,
     .unname = TRUE
 ) {
-    stop("Not implemented yet")
+    # stop("Not implemented yet")
     value <- rlang::list2(...) %>%
         unlist()
 
     choices <- c(
-
+        "searchPanes"
+        # Enable Search Panes
     )
+    # TODO: implement remaining options
+
     names(choices) <- choices
 
     valid::valid2(..., .choices = choices, .unname = .unname)
