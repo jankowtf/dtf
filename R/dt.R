@@ -13,7 +13,9 @@ datatable2 <- function(
     ...
 ) {
     # Get args from bundles
-    args <- bundles %>% dt_process_bundles()
+    args <- bundles %>%
+        dt_process_bundles() %>%
+        drop::drop_null()
 
     # Tracing
     if (verbose) {

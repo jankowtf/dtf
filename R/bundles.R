@@ -1000,6 +1000,96 @@ dt_bundle_select <- function(
     bundle
 }
 
+#' DT bundle: `lengthMenue`
+#'
+#' Not fully compliant with full DataTables functionality.
+#'
+#' See https://datatables.net/reference/option/lengthMenu
+#'
+#' TODO: Add remaining options
+#'
+#' See also: https://shiny.rstudio.com/articles/datatables.html
+#'
+#' @param pageLength
+#' @param fixedHeader
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' dt_bundle_lengthmenue()
+#' dt_bundle_lengthmenue(pageLength = 15)
+#' dt_bundle_lengthmenue(lengthMenu = c(15, 50, 100))
+dt_bundle_lengthmenue <- function(
+    pageLength = 50,
+    lengthMenu = list(c(15, 50, 100, -1), c("15", "50", "100", "All")),
+    .options = list(),
+    .verbose = FALSE
+) {
+    options <- compose_options(
+        dom = dt_bundle_dom(p = TRUE, standalone = TRUE),
+        paging = TRUE,
+        lengthMenu = lengthMenu,
+        pageLength = pageLength,
+        .extension_options = list()
+    )
+
+    bundle <- compose_bundle(
+        extensions = list(),
+        options = options
+    )
+
+    # if (.verbose) {
+    #     logger::log_trace("Bundle: {extension}")
+    #     logger::log_eval(bundle)
+    # }
+
+    bundle
+}
+
+#' DT bundle: bundle `Internationalization`
+#'
+#' See https://datatables.net/plug-ins/i18n/
+#'
+#' @param url [[character]] True URL to DataTables API (see
+#'   https://datatables.net/plug-ins/i18n/) or path to local JSON file
+#'
+#' @return
+#' @export
+dt_bundle_internationalization <- function(
+    url = "//cdn.datatables.net/plug-ins/1.12.0/i18n/de-DE.json"
+) {
+    # list(
+    #     options = list(
+    #         oLanguage = list(
+    #             # sInfo = "Zeige _START_ bis _END_ von _TOTAL_ Zeilen",
+    #             # sInfoThousands = "."
+    #             sInfo = "Showing _START_ to _END_ of _TOTAL_ rows",
+    #             sInfoThousands = ","
+    #         )
+    #     )
+    # )
+    # Keep as reference
+
+    options <- compose_options(
+        language = list(url = url),
+        .extension_options = list()
+    )
+
+    bundle <- compose_bundle(
+        extensions = list(),
+        options = options
+    )
+
+    # if (.verbose) {
+    #     logger::log_trace("Bundle: {extension}")
+    #     logger::log_eval(bundle)
+    # }
+
+    bundle
+
+}
+
 # Other -------------------------------------------------------------------
 
 
@@ -1022,38 +1112,7 @@ dt_bundle_initcomplete <- function() {
     )
 }
 
-#' DT bundle: bundle `Internationalization`
-#'
-#' See https://datatables.net/reference/option/
-#'
-#' @return
-#' @export
-dt_bundle_internationalization <- function() {
-    list(
-        options = list(
-            oLanguage = list(
-                # sInfo = "Zeige _START_ bis _END_ von _TOTAL_ Zeilen",
-                # sInfoThousands = "."
-                sInfo = "Showing _START_ to _END_ of _TOTAL_ rows",
-                sInfoThousands = ","
-            )
-        )
-    )
-}
 
-dt_bundle_lengthmenue <- function(
-    pageLength = 50,
-    fixedHeader = TRUE
-) {
-    list(
-        options = list(
-            dom = dt_bundle_dom(p = TRUE),
-            paging = TRUE,
-            pageLength = pageLength,
-            lengthMenu = list(c(15, 50, 100, -1), c("15", "50", "100", "All"))
-        )
-    )
-}
 
 #' DT bundle: plugin `naturalJS`
 #'

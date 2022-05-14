@@ -1,3 +1,12 @@
+# dti 0.0.0.9004 (2022-05-14)
+
+Length menue + internationalization
+
+- Refactored `dt_bundle_lengthmenue()`
+- Refactored `dt_bundle_internationalization()`
+
+----------
+
 # dti 0.0.0.9003 (2022-05-05)
 
 drop

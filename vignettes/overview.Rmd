@@ -327,17 +327,17 @@ Custom `.options` object
 ```{r}
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_fixedheader(
-        .options = list(fixedHeader = TRUE)
+        bundles = dt_bundle_fixedheader(
+            .options = list(fixedHeader = TRUE)
+        )
     )
-)
 mtcars %>% dplyr::bind_rows(mtcars) %>% 
     dplyr::add_rownames() %>% 
     datatable2(
-    bundles = dt_bundle_fixedheader(
-        .options = list(fixedHeader = TRUE)
+        bundles = dt_bundle_fixedheader(
+            .options = list(fixedHeader = TRUE)
+        )
     )
-)
 ```
 
 ----------
@@ -377,10 +377,10 @@ Custom `.options` object
 ```{r}
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_keytable(
-        .options = list(keys = FALSE)
+        bundles = dt_bundle_keytable(
+            .options = list(keys = FALSE)
+        )
     )
-)
 ```
 
 ----------
@@ -420,10 +420,10 @@ Custom `.options` object
 ```{r}
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_responsive(
-        .options = list(responsive = FALSE)
+        bundles = dt_bundle_responsive(
+            .options = list(responsive = FALSE)
+        )
     )
-)
 ```
 
 ----------
@@ -467,10 +467,10 @@ Custom `.options` object
 ```{r}
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_rowgroup(
-        .options = list(dataSrc = 2)
+        bundles = dt_bundle_rowgroup(
+            .options = list(dataSrc = 2)
+        )
     )
-)
 ```
 
 ----------
@@ -510,10 +510,10 @@ Custom `.options` object
 ```{r}
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_rowreorder(
-        .options = list(rowReorder = FALSE)
+        bundles = dt_bundle_rowreorder(
+            .options = list(rowReorder = FALSE)
+        )
     )
-)
 ```
 
 ----------
@@ -545,8 +545,8 @@ dt_bundle_scroller(scrollY = 100)
 ```{r}
 mtcars %>% dplyr::add_rownames() %>% 
     datatable2(
-    bundles = dt_bundle_scroller(scrollY = 100)
-)
+        bundles = dt_bundle_scroller(scrollY = 100)
+    )
 ```
 
 Custom `.options` object
@@ -554,10 +554,10 @@ Custom `.options` object
 ```{r}
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_scroller(
-        .options = list(scroller = FALSE)
+        bundles = dt_bundle_scroller(
+            .options = list(scroller = FALSE)
+        )
     )
-)
 ```
 
 ----------
@@ -590,38 +590,38 @@ dt_bundle_searchpanes(targets = "mpg", .data = mtcars)
 ```{r}
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_searchpanes(targets = 1:10)
-)
+        bundles = dt_bundle_searchpanes(targets = 1:10)
+    )
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_searchpanes(targets = 11)
-)
+        bundles = dt_bundle_searchpanes(targets = 11)
+    )
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_searchpanes(targets = "carb", .data = mtcars, .verbose = TRUE)
-)
+        bundles = dt_bundle_searchpanes(targets = "carb", .data = mtcars, .verbose = TRUE)
+    )
 ```
 
 Custom `.options` object 
 
 ```{r}
 try(mtcars %>%
-    datatable2(
-    bundles = dt_bundle_searchpanes(
-        .options = list(show = FALSE)
-    )
-))
+        datatable2(
+            bundles = dt_bundle_searchpanes(
+                .options = list(show = FALSE)
+            )
+        ))
 ```
 
 ```{r}
 mtcars %>% DT::datatable(
-  extensions = c('Select', 'SearchPanes'),
-  options = list(dom = 'Pfrtip', columnDefs = list(list(
-    searchPanes = list(show = FALSE), 
-      targets = 1:10
-      # targets = c(1:2, 5)
-  ))),
-  selection = 'none'
+    extensions = c('Select', 'SearchPanes'),
+    options = list(dom = 'Pfrtip', columnDefs = list(list(
+        searchPanes = list(show = FALSE), 
+        targets = 1:10
+        # targets = c(1:2, 5)
+    ))),
+    selection = 'none'
 )
 ```
 
@@ -654,19 +654,19 @@ dt_bundle_select("selectRows", "selectColumns")
 ```{r}
 mtcars %>%
     datatable2(
-    bundles = dt_bundle_select("selectRows", "selectColumns", "selectCells")
-)
+        bundles = dt_bundle_select("selectRows", "selectColumns", "selectCells")
+    )
 ```
 
 Custom `.options` object 
 
 ```{r}
 try(mtcars %>%
-    datatable2(
-    bundles = dt_bundle_select(
-        .options = list()
-    )
-))
+        datatable2(
+            bundles = dt_bundle_select(
+                .options = list()
+            )
+        ))
 # TODO: provide example for ':options'
 ```
 
@@ -718,7 +718,97 @@ mtcars %>% datatable2(
 )
 ```
 
------
+----------
+
+# [Option] lengthMenue
+
+## Default
+
+```{r}
+dt_bundle_lengthmenue()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_lengthmenue()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_lengthmenue(pageLength = 100)
+```
+
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = dt_bundle_lengthmenue(pageLength = 100)
+    )
+```
+
+Custom `.options` object
+
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = dt_bundle_lengthmenue(
+            .options = list(pageLength = 15)
+        )
+    )
+```
+
+Explicit options don't seem to work yet because the mechanism differs from "true" bundles (as opposed to "just" options)
+
+----------
+
+# [Option] Internationalization
+
+- https://rstudio.github.io/DT/004-i18n.html
+- https://datatables.net/plug-ins/i18n/
+- https://stackoverflow.com/questions/54181350/datatables-internationalization-with-local-language-file-in-shiny
+
+# Option only: lengthMenue
+
+## Default
+
+```{r}
+dt_bundle_internationalization()
+```
+
+```{r}
+mtcars %>% datatable2(
+    bundles = dt_bundle_internationalization()
+)
+```
+
+## Custom options
+
+```{r}
+dt_bundle_internationalization(url = test_path("data/de-DE.json"))
+```
+
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = dt_bundle_internationalization(url = test_path("data/de-DE.json"))
+    )
+```
+
+Custom `.options` object
+
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = dt_bundle_internationalization(
+            .options = list(pageLength = 15)
+        )
+    )
+```
+
+Explicit options don't seem to work yet because the mechanism differs from "true" bundles (as opposed to "just" options)
+
+----------
 
 # Available bundles
 

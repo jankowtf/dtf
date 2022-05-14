@@ -217,13 +217,9 @@ test_that("fixedcolumns", {
     ))
     expect_identical(result, expectation)
 
-    result <- dt_bundle_fixedcolumns(
-        fixedColumns = list(left = "cyl"),
-        data = mtcars
-    )
-    expectation <- list(extensions = "FixedColumns", options = list(
-        scrollX = TRUE, fixedColumns = list(left = 1L)
-    ))
+    result <- dt_bundle_fixedcolumns(left = "cyl", .data = mtcars)
+    expectation <- list(extensions = "FixedColumns", options = list(scrollX = TRUE,
+        fixedColumns = list(left = 3L)))
     expect_identical(result, expectation)
 })
 
@@ -331,17 +327,29 @@ test_that("select", {
     expect_error(dt_bundle_select("selectAll", "invalid"))
 })
 
-# Other -------------------------------------------------------------------
+# [Option] lengthmenue ----------------------------------------------------
+
+test_that("lengthmenue", {
+    result <- dt_bundle_lengthmenue()
+    expectation <- list(options = list(dom = "BRSfilprt", paging = TRUE, lengthMenu = list(
+        c(15, 50, 100, -1), c("15", "50", "100", "All")), pageLength = 50))
+    expect_identical(result, expectation)
+
+    result <- dt_bundle_lengthmenue(lengthMenu = c(15, 50, 100))
+    expectation <- list(options = list(dom = "BRSfilprt", paging = TRUE, lengthMenu = c(15,
+        50, 100), pageLength = 50))
+    expect_identical(result, expectation)
+})
+
+# [Option] internationalization -------------------------------------------
 
 test_that("internationalization", {
     result <- dt_bundle_internationalization()
-    expectation <-
-        list(options = list(
-            oLanguage = list(sInfo = "Showing _START_ to _END_ of _TOTAL_ rows",
-                sInfoThousands = ",")
-        ))
-    expect_equal(result, expectation, ignore_attr = TRUE)
+    expectation <- list(options = list(language = list(url = "//cdn.datatables.net/plug-ins/1.12.0/i18n/de-DE.json")))
+    expect_identical(result, expectation)
 })
+
+# Other -------------------------------------------------------------------
 
 test_that("naturaljs", {
     result <- dt_bundle_naturaljs()
@@ -374,32 +382,9 @@ test_that("scroller", {
 
 test_that("searchpanes", {
     result <- dt_bundle_searchpanes()
-    expectation <- list(
-        extensions = c("Select", "SearchPanes"),
-        options = list(dom = "Pfrtip", columnDefs = list(list(
-            searchPanes = list(show = FALSE), targets = 1:4
-        ))),
-        selection = "none"
-    )
-    expect_identical(result, expectation)
-})
-
-test_that("select_buttons", {
-    result <- dt_bundle_select_buttons()
-    expectation <- list(
-        extensions = c("Select", "Buttons"),
-        select = list(style = "os", items = "row"),
-        dom = "Blfrtip",
-        rowId = 0,
-        buttons = c(
-            "selectAll",
-            "selectNone",
-            "selectRows",
-            "selectColumns",
-            "selectCells"
-        ),
-        selection = "none"
-    )
+    expectation <- list(extensions = c("SearchPanes", "Select"), options = list(
+        dom = "BRSfilprtP", columnDefs = list(list(searchPanes = list(
+            show = FALSE), targets = 1L))), selection = "none")
     expect_identical(result, expectation)
 })
 
