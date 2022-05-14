@@ -784,29 +784,16 @@ mtcars %>% datatable2(
 
 ## Custom options
 
-```{r}
-dt_bundle_internationalization(url = test_path("data/de-DE.json"))
+```{r eval=FALSE}
+dt_bundle_internationalization(url = testthat::test_path("data/de-DE.json"))
 ```
 
-```{r}
+```{r eval=FALSE}
 mtcars %>%
     datatable2(
         bundles = dt_bundle_internationalization(url = test_path("data/de-DE.json"))
     )
 ```
-
-Custom `.options` object
-
-```{r}
-mtcars %>%
-    datatable2(
-        bundles = dt_bundle_internationalization(
-            .options = list(pageLength = 15)
-        )
-    )
-```
-
-Explicit options don't seem to work yet because the mechanism differs from "true" bundles (as opposed to "just" options)
 
 ----------
 
