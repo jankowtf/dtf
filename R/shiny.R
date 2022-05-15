@@ -19,18 +19,19 @@ mod_render_dt_ui <- function(
 #' data_render_dt Server Functions
 #'
 #' @param id [[character]]
-#' @param rdata Reactive data
-#' @param filter [[function]]
-#' @param scrollY [[integer]]
-#' @param escape [[logical]]
-#' @param editable [[logical]]
-#' @param scrollX [[integer]]
-#' @param selection [[character]]
-#' @param fixedColumns.leftColumns [[character]]
-#' @param bundles [[list]]
-#' @param trans_fn [[function]]
 #' @param output_id [[character]]
-#' @param verbose [[logical]] Print tracing information
+#' @param data
+#' @param scrollY [[integer]]
+#' @param left [[integer]]
+#' @param right [[integer]]
+#' @param trans_fn [[function]]
+#' @param rename_fn [[function]]
+#' @param .bundles [[list]]
+#' @param .rownames [[logical]]
+#' @param .editable [[logical]]
+#' @param .escape [[logical]]
+#' @param .verbose [[logical]]
+#' @param ... Addtional arguments passed to [DT::datatable()]
 #'
 #' @export
 mod_render_dt_server <- function(
@@ -59,6 +60,7 @@ mod_render_dt_server <- function(
         # Bundles
         bundles_default <- list(
             dt_bundle_scroller(scrollY = scrollY),
+            dt_bundle_colreorder(),
             dt_bundle_fixedheader(),
             dt_bundle_fixedcolumns(left = left),
             dt_bundle_keytable(),
