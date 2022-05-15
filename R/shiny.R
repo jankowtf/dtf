@@ -2,6 +2,7 @@
 #'
 #' @param id [[character]]
 #' @param output_id [[character]]
+#' @param .verbose [[logical]]
 #'
 #' @description A shiny Module.
 #'
@@ -9,11 +10,18 @@
 #' @export
 mod_render_dt_ui <- function(
     id,
-    output_id = "dt"
+    output_id = "dt",
+    .verbose = FALSE
 ){
     ns <- NS(id)
 
-    shiny::dataTableOutput(ns(output_id))
+    if (.verbose) {
+        print(ns(""))
+        print(output_id)
+        print(ns(output_id))
+    }
+
+    DT::dataTableOutput(ns(output_id))
 }
 
 #' data_render_dt Server Functions
@@ -56,6 +64,12 @@ mod_render_dt_server <- function(
 ) {
     shiny::moduleServer(id, function(input, output, session) {
         ns <- session$ns
+
+        if (.verbose) {
+            print(ns(""))
+            print(output_id)
+            print(ns(output_id))
+        }
 
         # Bundles
         bundles_default <- list(

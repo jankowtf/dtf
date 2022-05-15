@@ -1,3 +1,11 @@
+# dti 0.0.0.9010 (2022-05-15)
+
+Fixed UI module
+
+- Module UI uses `DT::dataTableOutput()` instead of `shiny::dataTableOutput()` as this seems to fix the issue of the DT not being displayed correctly. Not sure why the one works while the other doesn't, though. Also added some tracing info for namespacing stuff just in case
+
+----------
+
 # dti 0.0.0.9009 (2022-05-15)
 
 Roxygen and colreorder
