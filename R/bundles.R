@@ -1012,12 +1012,34 @@ dt_bundle_internationalization <- function(
     bundle
 }
 
+#' DT bundle: `Internationalization: en`
+#'
+#' Convenience function for language `en`
+#'
+#' @param url [[character]] True URL to DataTables API (see
+#'   https://datatables.net/plug-ins/i18n/) or path to local JSON file
+#'
+#' @return
+#' @export
+#'
+#' @examples
 dt_bundle_internationalization_en <- function(
     url = character()
 ) {
     dt_bundle_internationalization(url = url)
 }
 
+#' DT bundle: `Internationalization: de`
+#'
+#' Convenience function for language `de`
+#'
+#' @param url [[character]] True URL to DataTables API (see
+#'   https://datatables.net/plug-ins/i18n/) or path to local JSON file
+#'
+#' @return
+#' @export
+#'
+#' @examples
 dt_bundle_internationalization_de <- function(
     url = "//cdn.datatables.net/plug-ins/1.12.0/i18n/de-DE.json"
 ) {
