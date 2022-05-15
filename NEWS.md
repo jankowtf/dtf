@@ -1,3 +1,15 @@
+# dti 0.0.0.9005 (2022-05-15)
+
+Fixed list bundle processing
+
+- Fixed `dt_process_bundles()` for lists (`dt_process_bundles_list()`)
+- Refactored `dt_bundle_dom()`
+- Removed arg `.verbose` from `dt_bundles_*()` functions. Tracing better happens
+either through `dt_process_bundles()` or through `datatable2(..., verbose = TRUE)`
+- Remaining TODO: align unit tests
+
+----------
+
 # dti 0.0.0.9004 (2022-05-14)
 
 Length menue + internationalization

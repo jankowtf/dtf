@@ -4,17 +4,17 @@
 #'
 #' See https://datatables.net/reference/option/dom
 #'
-#' @param f [[logical]] The `f`iltering input
-#' @param i [[logical]] The table `i`nformation summary
 #' @param l [[logical]] The `l`ength changing input control
+#' @param f [[logical]] The `f`iltering input
+#' @param t [[logical]] The `t`able itself
+#' @param i [[logical]] The table `i`nformation summary
 #' @param p [[logical]] The `p`agination control
 #' @param r [[logical]] The p`r`ocessing display element
-#' @param t [[logical]] The `t`able itself
 #' @param B [[logical]] Buttons
-#' @param Q [[logical]] SearchBuilder
-#' @param P [[logical]] SearchPanes
 #' @param R [[logical]] ColReorder
 #' @param S [[logical]] Scroller
+#' @param P [[logical]] SearchPanes
+#' @param Q [[logical]] SearchBuilder
 #' @param standalone [[logical]] Return actual `dom` value or listified option
 #' @param consolidate [[logical]] Consolidate with `dom_default`
 #' @param dom_default [[character] or [list]] Dependes on `consolidate`
@@ -28,18 +28,18 @@
 #' dt_bundle_dom(f = FALSE, B = FALSE, Q = TRUE)
 dt_bundle_dom <- function(
     # --- Options
-    f = TRUE,
-    i = TRUE,
     l = TRUE,
+    f = TRUE,
+    t = TRUE,
+    i = TRUE,
     p = TRUE,
     r = TRUE,
-    t = TRUE,
     # --- Extensions
-    B = TRUE,
-    Q = FALSE,
+    B = FALSE,
+    R = FALSE,
+    S = FALSE,
     P = FALSE,
-    R = TRUE,
-    S = TRUE,
+    Q = FALSE,
     standalone = FALSE,
     consolidate = TRUE
 ) {
@@ -56,7 +56,10 @@ dt_bundle_dom <- function(
     R <- ifelse(R, "R", "")
     S <- ifelse(S, "S", "")
 
-    dom <- "{B}{Q}{P}{R}{S}{f}{i}{l}{p}{r}{t}" %>%
+    # dom <- "{B}{Q}{P}{R}{S}{f}{i}{l}{p}{r}{t}" %>%
+    #     stringr::str_glue() %>%
+    #     as.character()
+    dom <- "{B}{R}{S}{P}{Q}{l}{f}{t}{i}{p}{r}" %>%
         stringr::str_glue() %>%
         as.character()
 
@@ -67,7 +70,8 @@ dt_bundle_dom <- function(
             consolidate = FALSE
         ) %>% stringr::str_split("") %>% unlist()
 
-        dom <- c(dom_default_tokenized, dom_tokenized) %>%
+        # dom <- c(dom_default_tokenized, dom_tokenized) %>%
+        dom <- c(dom_tokenized, dom_default_tokenized) %>%
             unique() %>%
             stringr::str_c(collapse = "")
     }
@@ -95,7 +99,6 @@ dt_bundle_dom <- function(
 #' @param .options ([list]) Object to pass custom options beyond pre-defined
 #'   arguments
 #' @param .data ([tibble]) Optional data for column name lookup
-#' @param .verbose ([logical]) Print status messages yes/no?
 #'
 #' @return
 #' @export
@@ -104,8 +107,7 @@ dt_bundle_autofill <- function(
     focus = valid_dt_options_autofill_focus(1),
     # editor = "editor",
     .data = tibble::tibble(),
-    .options = list(),
-    .verbose = FALSE
+    .options = list()
 ) {
     extension <- dt_extensions("AutoFill")
     option_name <- dt_options("autoFill", extension = extension)
@@ -116,10 +118,6 @@ dt_bundle_autofill <- function(
             extension = extension,
             option_name = option_name
         )
-        if (.verbose) {
-            logger::log_trace("Bundle: {extension}")
-            logger::log_eval(bundle)
-        }
         return(bundle)
     }
 
@@ -143,11 +141,6 @@ dt_bundle_autofill <- function(
         options = options,
         option_name = option_name
     )
-
-    if (.verbose) {
-        logger::log_trace("Bundle: {extension}")
-        logger::log_eval(bundle)
-    }
 
     bundle
 }
@@ -422,16 +415,13 @@ dt_bundle_buttons_en <- function(
 #' @param realtime ([logical]) Show column reorder in realtime yes/no
 #' @param .options ([list]) Object to pass custom options beyond pre-defined
 #'   arguments
-#' @param .verbose ([logical]) Log status messages yes/no
-#'
 #' @return
 #' @export
 #' dt_bundle_colreorder()
 #' dt_bundle_colreorder(realtime = TRUE)
 dt_bundle_colreorder <- function(
     realtime = FALSE,
-    .options = list(),
-    .verbose = FALSE
+    .options = list()
 ) {
     extension <- dt_extensions("ColReorder")
     option_name <- dt_options("colReorder", extension = extension)
@@ -451,11 +441,6 @@ dt_bundle_colreorder <- function(
         options = options
     )
 
-    if (.verbose) {
-        logger::log_trace("Bundle: {extension}")
-        logger::log_eval(bundle)
-    }
-
     bundle
 }
 
@@ -468,12 +453,10 @@ dt_bundle_colreorder <- function(
 #'   *name* then `data` must be proviced for the position lookup.
 #' @param right ([integer] or [character]) Column position or name contained. If
 #'   *name* then `data` must be proviced for the position lookup.
-#' @param data [[tibble::tibble]] Optional data for column name lookup
-#' @param verbose ([logical]) Trace structure of resulting DT config bundle
-#'   yes/no
 #' @param .options ([list]) Object to pass custom options for this extension
 #'   beyond pre-defined arguments. Placeholder in case more flexibility is
 #'   needed
+#' @param .data
 #'
 #' @return
 #' @export
@@ -486,8 +469,7 @@ dt_bundle_fixedcolumns <- function(
     left = 1L,
     right = integer(),
     .data = tibble::tibble(),
-    .options = list(),
-    .verbose = FALSE
+    .options = list()
 ) {
     extension <- dt_extensions("FixedColumns")
     option_name <- dt_options("fixedColumns", extension = extension)
@@ -513,11 +495,6 @@ dt_bundle_fixedcolumns <- function(
         options = options
     )
 
-    if (.verbose) {
-        logger::log_trace("Bundle: {extension}")
-        logger::log_eval(bundle)
-    }
-
     bundle
 }
 
@@ -530,15 +507,13 @@ dt_bundle_fixedcolumns <- function(
 #' @param pageLength [[integer]] Page length option
 #' @param .options [[list]] Object to pass custom options for this extension
 #'   beyond pre-defined arguments
-#' @param .verbose [[logical]] Log tracing messages yes/no
 #'
 #' @return
 #' @export
 dt_bundle_fixedheader <- function(
     fixedHeader = TRUE,
     pageLength = 50,
-    .options = list(),
-    .verbose = FALSE
+    .options = list()
 ) {
     extension <- dt_extensions("FixedHeader")
     option_name <- dt_options("fixedHeader", extension = extension)
@@ -560,11 +535,6 @@ dt_bundle_fixedheader <- function(
         options = options
     )
 
-    if (.verbose) {
-        logger::log_trace("Bundle: {extension}")
-        logger::log_eval(bundle)
-    }
-
     bundle
 }
 
@@ -580,14 +550,12 @@ dt_bundle_fixedheader <- function(
 #' @param keys [[logical]] Use KeyTable extension yes/no
 #' @param .options [[list]] Object to pass custom options for this extension
 #'   beyond pre-defined arguments
-#' @param .verbose [[logical]] Log tracing messages yes/no
 #'
 #' @return
 #' @export
 dt_bundle_keytable <- function(
     keys = TRUE,
-    .options = list(),
-    .verbose = FALSE
+    .options = list()
 ) {
     extension <- dt_extensions("KeyTable")
     option_name <- dt_options("keys", extension = extension)
@@ -608,11 +576,6 @@ dt_bundle_keytable <- function(
         options = options
     )
 
-    if (.verbose) {
-        logger::log_trace("Bundle: {extension}")
-        logger::log_eval(bundle)
-    }
-
     bundle
 }
 
@@ -628,18 +591,12 @@ dt_bundle_keytable <- function(
 #' @param responsive [[logical]] Use KeyTable extension yes/no
 #' @param .options [[list]] Object to pass custom options for this extension
 #'   beyond pre-defined arguments
-#' @param .verbose [[logical]] Log tracing messages yes/no
-#'
-#' @param responsive
-#' @param .options
-#' @param .verbose
 #'
 #' @return
 #' @export
 dt_bundle_responsive <- function(
     responsive = TRUE,
-    .options = list(),
-    .verbose = FALSE
+    .options = list()
 ) {
     extension <- dt_extensions("Responsive")
     option_name <- dt_options("responsive", extension = extension)
@@ -660,11 +617,6 @@ dt_bundle_responsive <- function(
         options = options
     )
 
-    if (.verbose) {
-        logger::log_trace("Bundle: {extension}")
-        logger::log_eval(bundle)
-    }
-
     bundle
 }
 
@@ -681,15 +633,14 @@ dt_bundle_responsive <- function(
 #'   column.
 #' @param .options [[list]] Object to pass custom options for this extension
 #'   beyond pre-defined arguments
-#' @param .verbose [[logical]] Log tracing messages yes/no
+#' @param .data
 #'
 #' @return
 #' @export
 dt_bundle_rowgroup <- function(
     dataSrc = 1,
     .options = list(),
-    .data = tibble::tibble(),
-    .verbose = FALSE
+    .data = tibble::tibble()
 ) {
     extension <- dt_extensions("RowGroup")
     option_name <- dt_options("rowGroup", extension = extension)
@@ -713,11 +664,6 @@ dt_bundle_rowgroup <- function(
         selection = "none"
     )
 
-    if (.verbose) {
-        logger::log_trace("Bundle: {extension}")
-        logger::log_eval(bundle)
-    }
-
     bundle
 }
 
@@ -733,14 +679,12 @@ dt_bundle_rowgroup <- function(
 #' @param rowReorder [[logical]] Use RowReorder extension yes/no
 #' @param .options [[list]] Object to pass custom options for this extension
 #'   beyond pre-defined arguments
-#' @param .verbose [[logical]] Log tracing messages yes/no
 #'
 #' @return
 #' @export
 dt_bundle_rowreorder <- function(
     rowReorder = TRUE,
-    .options = list(),
-    .verbose = FALSE
+    .options = list()
 ) {
     extension <- dt_extensions("RowReorder")
     option_name <- dt_options("rowReorder", extension = extension)
@@ -762,11 +706,6 @@ dt_bundle_rowreorder <- function(
         options = options
     )
 
-    if (.verbose) {
-        logger::log_trace("Bundle: {extension}")
-        logger::log_eval(bundle)
-    }
-
     bundle
 }
 
@@ -784,7 +723,6 @@ dt_bundle_rowreorder <- function(
 #' @param scrollY [[integer]] Vertical scrolling space
 #' @param .options [[list]] Object to pass custom options for this extension
 #'   beyond pre-defined arguments
-#' @param .verbose [[logical]] Log tracing messages yes/no
 #'
 #' @return
 #' @export
@@ -792,8 +730,7 @@ dt_bundle_scroller <- function(
     scroller = TRUE,
     deferRender = TRUE,
     scrollY = 200,
-    .options = list(),
-    .verbose = FALSE
+    .options = list()
 ) {
     extension <- dt_extensions("Scroller")
     option_name <- dt_options("scroller", extension = extension)
@@ -806,6 +743,7 @@ dt_bundle_scroller <- function(
     )
 
     options <- compose_options(
+        dom = dt_bundle_dom(S = TRUE, standalone = TRUE),
         deferRender = deferRender,
         scrollY = scrollY,
         .extension_options = extension_options
@@ -815,11 +753,6 @@ dt_bundle_scroller <- function(
         extensions = extension,
         options = options
     )
-
-    if (.verbose) {
-        logger::log_trace("Bundle: {extension}")
-        logger::log_eval(bundle)
-    }
 
     bundle
 }
@@ -834,9 +767,11 @@ dt_bundle_scroller <- function(
 #'
 #' TODO: Add remaining options
 #'
+#' @param show
+#' @param targets
 #' @param .options [[list]] Object to pass custom options for this extension
 #'   beyond pre-defined arguments
-#' @param .verbose [[logical]] Log tracing messages yes/no
+#' @param .data
 #'
 #' @return
 #' @export
@@ -844,8 +779,7 @@ dt_bundle_searchpanes <- function(
     show = FALSE,
     targets = 1L,
     .options = list(),
-    .data = tibble::tibble(),
-    .verbose = FALSE
+    .data = tibble::tibble()
 ) {
     if (length(.options)) {
         stop("Use of '.options' not supported yet.")
@@ -891,11 +825,6 @@ dt_bundle_searchpanes <- function(
         selection = "none"
     )
 
-    if (.verbose) {
-        logger::log_trace("Bundle: {extensions}")
-        logger::log_eval(bundle)
-    }
-
     bundle
     # list(
     #     extensions = dt_extensions('Select', 'SearchPanes'),
@@ -919,10 +848,15 @@ dt_bundle_searchpanes <- function(
 #'
 #' TODO: Add remaining options
 #'
+#' @param ...
+#' @param style
+#' @param items
+#' @param selection
 #' @param .options [[list]] Object to pass custom options for this extension
 #'   beyond pre-defined arguments
-#' @param .verbose [[logical]] Log tracing messages yes/no
-#'
+#' @param .buttons
+#' @param .as_is
+#' @param .flatten
 #' @return
 #' @export
 dt_bundle_select <- function(
@@ -931,28 +865,27 @@ dt_bundle_select <- function(
     items = "row",
     selection = "none",
     .options = list(),
-    .verbose = FALSE,
     .buttons = valid_dt_options_buttons_select_names(),
     .as_is = FALSE,
     .flatten = FALSE
 ) {
-    list(
-        extensions = dt_extensions('Select', 'Buttons'),
-        select = list(
-            style = 'os',
-            items = 'row'
-        ),
-        dom = 'Blfrtip',
-        rowId = 0,
-        buttons = c(
-            'selectAll',
-            'selectNone',
-            'selectRows',
-            'selectColumns',
-            'selectCells'
-        ),
-        selection = "none"
-    )
+    # list(
+    #     extensions = dt_extensions('Select', 'Buttons'),
+    #     select = list(
+    #         style = 'os',
+    #         items = 'row'
+    #     ),
+    #     dom = 'Blfrtip',
+    #     rowId = 0,
+    #     buttons = c(
+    #         'selectAll',
+    #         'selectNone',
+    #         'selectRows',
+    #         'selectColumns',
+    #         'selectCells'
+    #     ),
+    #     selection = "none"
+    # )
 
     extension_select <- dt_extensions("Select")
     option_name_select <- dt_options("select", extension = extension_select)
@@ -1010,8 +943,9 @@ dt_bundle_select <- function(
 #'
 #' See also: https://shiny.rstudio.com/articles/datatables.html
 #'
+#' @param lengthMenu
 #' @param pageLength
-#' @param fixedHeader
+#' @param .options
 #'
 #' @return
 #' @export
@@ -1023,8 +957,7 @@ dt_bundle_select <- function(
 dt_bundle_lengthmenue <- function(
     pageLength = 50,
     lengthMenu = list(c(15, 50, 100, -1), c("15", "50", "100", "All")),
-    .options = list(),
-    .verbose = FALSE
+    .options = list()
 ) {
     options <- compose_options(
         dom = dt_bundle_dom(p = TRUE, standalone = TRUE),
@@ -1038,11 +971,6 @@ dt_bundle_lengthmenue <- function(
         extensions = list(),
         options = options
     )
-
-    # if (.verbose) {
-    #     logger::log_trace("Bundle: {extension}")
-    #     logger::log_eval(bundle)
-    # }
 
     bundle
 }
@@ -1081,18 +1009,11 @@ dt_bundle_internationalization <- function(
         options = options
     )
 
-    # if (.verbose) {
-    #     logger::log_trace("Bundle: {extension}")
-    #     logger::log_eval(bundle)
-    # }
-
     bundle
 
 }
 
 # Other -------------------------------------------------------------------
-
-
 
 #' DT bundle: bundle `initComplete`
 #'

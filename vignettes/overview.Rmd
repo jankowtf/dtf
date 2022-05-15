@@ -25,17 +25,17 @@ logger::log_threshold(logger::TRACE)
 
 See https://rstudio.github.io/DT/extensions.html (setion *1. AutoFill*)
 
-With the AutoFill extension, you will see a blue square in the bottom-right corner of a cell when you mouse over the cell. You can drag it to automatically fill the column.
+With the AutoFill extension, you will see a blue square in the bottom-r^ight corner of a cell when you mouse over the cell. You can drag it to automatically fill the column.
 
 ## Default
 
 ```{r}
 dt_bundle_autofill()
-dt_bundle_autofill(.verbose = TRUE)
+dt_bundle_autofill()
 ```
 
 ```{r}
-mtcars %>% datatable2(bundle = dt_bundle_autofill())
+mtcars %>% datatable2(bundle = dt_bundle_autofill(), verbose = TRUE)
 ```
 
 ```{r}
@@ -120,15 +120,15 @@ dt_bundle_buttons()
 ```
 
 ```{r}
-mtcars %>% datatable2(bundles = dt_bundle_buttons())
+mtcars %>% datatable2(bundles = dt_bundle_buttons(), verbose = TRUE)
 ```
 
 ```{r}
-mtcars %>% datatable2(bundles = dt_bundle_buttons_de())
+mtcars %>% datatable2(bundles = dt_bundle_buttons_de(), verbose = TRUE)
 ```
 
 ```{r}
-mtcars %>% datatable2(bundles = dt_bundle_buttons_en())
+mtcars %>% datatable2(bundles = dt_bundle_buttons_en(), verbose = TRUE)
 ```
 
 ## Custom options
@@ -198,7 +198,7 @@ dt_bundle_colreorder()
 
 ```{r}
 mtcars %>% datatable2(
-    bundles = dt_bundle_colreorder(.verbose = TRUE)
+    bundles = dt_bundle_colreorder()
 )
 ```
 
@@ -598,7 +598,7 @@ mtcars %>%
     )
 mtcars %>%
     datatable2(
-        bundles = dt_bundle_searchpanes(targets = "carb", .data = mtcars, .verbose = TRUE)
+        bundles = dt_bundle_searchpanes(targets = "carb", .data = mtcars)
     )
 ```
 
@@ -812,4 +812,41 @@ list(
     dt_bundle_buttons()
 ) %>% 
     dt_process_bundles()
+```
+
+# Scratch
+
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = list(
+            # dt_bundle_lengthmenue()
+            dt_bundle_scroller()
+            # dt_bundle_internationalization(url = test_path("data/de-DE.json"))
+        )
+    )
+```
+
+```{r eval=FALSE}
+list(
+    dt_bundle_lengthmenue(),
+    dt_bundle_scroller(),
+    dt_bundle_internationalization(url = test_path("data/de-DE.json"))
+) %>% 
+    dt_process_bundles()
+```
+
+```{r}
+dt_bundle_lengthmenue() %>% 
+    dt_process_bundles()
+```
+
+```{r eval=FALSE}
+mtcars %>%
+    datatable2(
+        bundles = list(
+            dt_bundle_lengthmenue(),
+            dt_bundle_internationalization(url = test_path("data/de-DE.json"))
+        )
+    )
 ```

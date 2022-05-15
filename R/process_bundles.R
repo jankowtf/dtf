@@ -150,13 +150,14 @@ dt_process_bundles_list <- function(
         # Flatten
         purrr::flatten() %>%
         # Postprocess
-        purrr::imap(function(.x, .y) {
-            if (!is.list(.x)) {
-                return(.x)
-            }
-
-            .x %>% postprocess()
-        }) %>%
+        # purrr::imap(function(.x, .y) {
+        #     if (!is.list(.x)) {
+        #         return(.x)
+        #     }
+        #
+        #     .x %>% postprocess()
+        # }) %>%
+        postprocess() %>%
         list(.) %>%
         purrr::set_names("options")
 
