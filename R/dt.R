@@ -1,15 +1,16 @@
 #' Apply DT bundle configuration
 #'
-#' @param data [?]
-#' @param verbose [[logical]] Print args for call to [DT::datatable]
-#' @param bundles [?]
+#' @param data [[tibble] or [data.frame]] Data
+#' @param bundles [[list] (preferred) or [character] (legacy)] "Extension + options" bundles
+#' @param .verbose [[logical]] Output tracing info yes/no
+#' @param ... Additional arguments passed along to [DT::datatable]
 #'
 #' @return
 #' @export
 datatable2 <- function(
     data,
     bundles = character(),
-    verbose = FALSE,
+    .verbose = FALSE,
     ...
 ) {
     # Get args from bundles
@@ -18,8 +19,9 @@ datatable2 <- function(
         drop::drop_null()
 
     # Tracing
-    if (verbose) {
-        print(args)
+    if (.verbose) {
+        logger::log_trace("Processed bundles:")
+        logger::log_eval(args)
     }
 
     # Compose arguments

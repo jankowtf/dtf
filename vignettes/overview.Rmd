@@ -816,6 +816,9 @@ list(
 
 # Scratch
 
+Problem when using buttons together with length menue
+https://datatables.net/faqs/index#buttons-page-length).
+
 ```{r}
 mtcars %>%
     datatable2(
@@ -847,6 +850,42 @@ mtcars %>%
         bundles = list(
             dt_bundle_lengthmenue(),
             dt_bundle_internationalization(url = test_path("data/de-DE.json"))
+        )
+    )
+```
+
+----------------------
+
+# Rapid prototyping/debugging
+
+```{r}
+list(
+    dt_bundle_buttons(),
+    dt_bundle_buttons_en(),
+    dt_bundle_buttons_de()
+) %>% 
+    dt_process_bundles()
+```
+
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = list(
+            dt_bundle_buttons(),
+            dt_bundle_buttons_en(),
+            dt_bundle_buttons_de()
+        )
+    )
+```
+
+## Handling dubious dom
+
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = list(
+            dt_bundle_scroller(),
+            dt_bundle_buttons()
         )
     )
 ```

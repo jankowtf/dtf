@@ -1,3 +1,102 @@
+# Extensions --------------------------------------------------------------
+
+test_that("Extensions", {
+    result <- dt_extensions()
+    expectation <- c(
+        AutoFill = "AutoFill",
+        Buttons = "Buttons",
+        ColReorder = "ColReorder",
+        Editor = "Editor",
+        FixedColumns = "FixedColumns",
+        FixedHeader = "FixedHeader",
+        KeyTable = "KeyTable",
+        Responsive = "Responsive",
+        RowGroup = "RowGroup",
+        RowReorder = "RowReorder",
+        Scroller = "Scroller",
+        SearchBuilder = "SearchBuilder",
+        Select = "Select",
+        SearchPanes = "SearchPanes",
+        ColVis = "ColVis"
+    ) %>% unname()
+    expect_identical(result, expectation)
+
+    # result <- dt_extensions(.unname = FALSE)
+    # result <- dt_extensions(reverse = TRUE, .unname = FALSE)
+
+    result <- dt_extensions("Buttons")
+    # dt_extensions("Buttons", .unname = FALSE)
+    expectation <- c(Buttons = "Buttons") %>% unname()
+    expect_identical(result, expectation)
+
+    result <- dt_extensions("Buttons", "Scroller")
+    # dt_extensions("Buttons", "Scroller", .reverse = TRUE)
+    # dt_extensions("Buttons", "Scroller", .reverse = TRUE, .unname = TRUE)
+    expectation <- c(Buttons = "Buttons", Scroller = "Scroller") %>% unname()
+    expect_identical(result, expectation)
+
+    expect_error(dt_extensions("Invalid"),
+        regexp = "Invalid choice: valid_dt_extensions\\(\"Invalid\"\\)")
+})
+
+# Options -----------------------------------------------------------------
+
+test_that("Options", {
+    result <- dt_options("deferLoading")
+    expectation <- c(deferLoading = "deferLoading") %>% unname()
+    expect_identical(result, expectation)
+
+    result <- dt_options("autoFill", extension = "AutoFill")
+    expectation <- c(autoFill = "autoFill") %>% unname()
+    expect_identical(result, expectation)
+
+    expect_error(dt_options("_invalid_"),
+        regexp = 'Invalid choice: valid_dt_options\\("_invalid_"\\)')
+})
+
+# Process bundles ---------------------------------------------------------
+
+test_that("Process bundle: character", {
+    result <- dt_process_bundle(
+        bundle = "AutoFill"
+    )
+    expectation <- list(extensions = "AutoFill",
+        options = list(autoFill = TRUE))
+    expect_identical(result, expectation)
+})
+
+test_that("Process bundle: list", {
+    result <- dt_bundle_autofill() %>% dt_process_bundles()
+    expectation <- list(extensions = "AutoFill", options = list(autoFill = TRUE))
+    expect_identical(result, expectation)
+})
+
+test_that("Process bundle: list of lists", {
+    result <- list(
+        dt_bundle_autofill(),
+        dt_bundle_buttons()
+    ) %>% dt_process_bundles()
+    expectation <- list(extensions = c("AutoFill", "Buttons"), options = list(autoFill = TRUE,
+        dom = "BRSfilprt", buttons = c("colvis", "copy", "csv", "excel",
+            "pdf", "print")))
+    expect_identical(result, expectation)
+})
+
+test_that("Prepare bundles", {
+    result <- dt_process_bundles(
+        bundle = c("AutoFill", "Buttons")
+    )
+    expectation <- list(
+        extensions = c("AutoFill", "Buttons"),
+        options = list(
+            autoFill = TRUE,
+            dom = dt_bundle_dom(standalone = TRUE),
+            buttons = c("colvis", "copy", "csv", "excel", "pdf", "print")
+        )
+    )
+    expect_identical(result, expectation)
+})
+
 # autofill --------------------------------------------------------
 
 test_that("autofill", {

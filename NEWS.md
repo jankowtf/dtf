@@ -1,3 +1,21 @@
+# dti 0.0.0.9006 (2022-05-15)
+
+Shiny module
+
+- Modified `datatable2()`: 
+    - `.verbose`
+    - `logger::log_trace()`
+- Fixed multi dom inputs in `dt_process_bundles_list()`
+- Added internal util functions:
+    - `dt_process_bundles_list_merge()`
+    - `dt_process_bundles_list_postprocess()`
+    - `dt_process_bundles_list_postprocess_align_dom()`
+    - `dt_process_bundles_merge()` (legacy)
+    - `dt_process_bundles_postprocess()` (legacy)
+- Disclaimers: unit test still need to be aligned but glancing over the test results only indicates deviances wrt default `dom` structure/letter order or options structure wrt `dom`
+
+----------
+
 # dti 0.0.0.9005 (2022-05-15)
 
 Fixed list bundle processing

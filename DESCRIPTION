@@ -1,7 +1,7 @@
 Package: dti
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.0.0.9005
+Version: 0.0.0.9006
 Authors@R: 
     person(given = "Janko",
            family = "Thyson",
@@ -17,7 +17,7 @@ RoxygenNote: 7.1.2
 Imports: 
     assertthat,
     confx (>= 0.0.0.9024),
-    drop (>= 0.0.0.9002),
+    drop (>= 0.0.0.9003),
     DT,
     lifecycle,
     logger,
@@ -27,6 +27,7 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
+    shiny,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)

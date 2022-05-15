@@ -36,11 +36,11 @@ remotes::install_github("rappster/dti")
 
 ## What?
 
-
+An interface to customize `DT::datatable()` in a structured and composable way
 
 ## Why?
 
-
+Because I never seem to be able to remember the exact combination of `extensions` and `options` and how they interact.
 
 ## How?
 
@@ -117,5 +117,15 @@ mtcars %>% DT::datatable(
     options = list(
         autoFill = list(columns = c(1, 2, 3), focus = "click")
     )
+)
+```
+
+## Shiny module (experimental!)
+
+```{r eval=FALSE}
+mod_render_dt_server(
+    id = "my_id",
+    output_id = "dt",
+    data = mtcars
 )
 ```

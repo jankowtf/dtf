@@ -10,7 +10,10 @@ renv::install("here")
 
 renv::install("dplyr")
 renv::install("webshot")
+renv::install("shiny")
 webshot::install_phantomjs()
+
+usethis::use_package("shiny", type = "Suggests")
 
 # Dev preps ---------------------------------------------------------------
 

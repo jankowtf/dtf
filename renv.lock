@@ -312,15 +312,15 @@
     },
     "drop": {
       "Package": "drop",
-      "Version": "0.0.0.9002",
+      "Version": "0.0.0.9003",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "rappster",
       "RemoteRepo": "drop",
       "RemoteRef": "main",
-      "RemoteSha": "050fc11999a87880052f6d52533e18749ee3d70f",
-      "Hash": "4cc71a49a20c2416046111e6369f202e",
+      "RemoteSha": "6c09d704c5f7ac64b518679fddb08d251256dd3e",
+      "Hash": "bf01ad2dc5e0ff8a2c2da8533e1327db",
       "Requirements": [
         "lifecycle",
         "magrittr",
@@ -1098,6 +1098,18 @@
         "rematch2",
         "rlang",
         "tibble"
+      ]
+    },
+    "webshot": {
+      "Package": "webshot",
+      "Version": "0.5.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7261ab7f98e97c771217e6b87c085d6e",
+      "Requirements": [
+        "callr",
+        "jsonlite",
+        "magrittr"
       ]
     },
     "whisker": {
