@@ -795,6 +795,27 @@ mtcars %>%
     )
 ```
 
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = dt_bundle_internationalization(url = character())
+    )
+```
+
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = dt_bundle_internationalization_en()
+    )
+```
+
+```{r}
+mtcars %>%
+    datatable2(
+        bundles = dt_bundle_internationalization_de()
+    )
+```
+
 ----------
 
 # Available bundles

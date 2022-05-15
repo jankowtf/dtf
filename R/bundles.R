@@ -985,7 +985,7 @@ dt_bundle_lengthmenue <- function(
 #' @return
 #' @export
 dt_bundle_internationalization <- function(
-    url = "//cdn.datatables.net/plug-ins/1.12.0/i18n/de-DE.json"
+    url = character()
 ) {
     # list(
     #     options = list(
@@ -1010,7 +1010,18 @@ dt_bundle_internationalization <- function(
     )
 
     bundle
+}
 
+dt_bundle_internationalization_en <- function(
+    url = character()
+) {
+    dt_bundle_internationalization(url = url)
+}
+
+dt_bundle_internationalization_de <- function(
+    url = "//cdn.datatables.net/plug-ins/1.12.0/i18n/de-DE.json"
+) {
+    dt_bundle_internationalization(url = url)
 }
 
 # Other -------------------------------------------------------------------

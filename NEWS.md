@@ -1,3 +1,13 @@
+# dti 0.0.0.9011 (2022-05-15)
+
+Internationalization
+
+- Added convenience functions for internationalization: 
+    - `dt_bundle_internationalization_en()`
+    - `dt_bundle_internationalization_de()`
+
+----------
+
 # dti 0.0.0.9010 (2022-05-15)
 
 Fixed UI module
