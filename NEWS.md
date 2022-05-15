@@ -1,3 +1,12 @@
+# dti 0.0.0.9007 (2022-05-15)
+
+Small fixes
+
+- Fixed forgotten `postprocess()`
+- Fixed dependency issue with `drop` (hopefully)
+
+----------
+
 # dti 0.0.0.9006 (2022-05-15)
 
 Shiny module

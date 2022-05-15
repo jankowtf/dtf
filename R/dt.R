@@ -6,6 +6,7 @@
 #' @param ... Additional arguments passed along to [DT::datatable]
 #'
 #' @return
+#' @importFrom drop drop_null
 #' @export
 datatable2 <- function(
     data,

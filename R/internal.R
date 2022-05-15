@@ -7,6 +7,7 @@
 #' @param .flatten
 #'
 #' @return
+#' @importFrom drop drop_null drop_empty
 #' @export
 #'
 #' @examples
@@ -66,6 +67,17 @@ compose_options <- function(
     )
 }
 
+#' Title
+#'
+#' @param extensions
+#' @param options
+#' @param selection
+#' @param option_name
+#'
+#' @return
+#' @importFrom drop drop_null
+#'
+#' @examples
 compose_bundle <- function(
     extensions,
     options = list(TRUE) %>% purrr::set_names(option_name),

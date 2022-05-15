@@ -35,7 +35,7 @@ dt_bundle_autofill()
 ```
 
 ```{r}
-mtcars %>% datatable2(bundle = dt_bundle_autofill(), verbose = TRUE)
+mtcars %>% datatable2(bundle = dt_bundle_autofill(), .verbose = TRUE)
 ```
 
 ```{r}
@@ -120,15 +120,15 @@ dt_bundle_buttons()
 ```
 
 ```{r}
-mtcars %>% datatable2(bundles = dt_bundle_buttons(), verbose = TRUE)
+mtcars %>% datatable2(bundles = dt_bundle_buttons(), .verbose = TRUE)
 ```
 
 ```{r}
-mtcars %>% datatable2(bundles = dt_bundle_buttons_de(), verbose = TRUE)
+mtcars %>% datatable2(bundles = dt_bundle_buttons_de(), .verbose = TRUE)
 ```
 
 ```{r}
-mtcars %>% datatable2(bundles = dt_bundle_buttons_en(), verbose = TRUE)
+mtcars %>% datatable2(bundles = dt_bundle_buttons_en(), .verbose = TRUE)
 ```
 
 ## Custom options

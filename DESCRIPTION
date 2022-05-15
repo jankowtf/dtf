@@ -1,7 +1,7 @@
 Package: dti
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.0.0.9006
+Version: 0.0.0.9007
 Authors@R: 
     person(given = "Janko",
            family = "Thyson",
@@ -31,7 +31,7 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
-Remotes: 
+Remotes:  
     rappster/valid,
     rappster/confx,
     rappster/drop

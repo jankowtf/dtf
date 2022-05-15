@@ -149,12 +149,13 @@ dt_process_bundles_merge <- function(x) {
 dt_process_bundles_postprocess <- function(.x) {
     .x %>% purrr::imap(function(.opt, .name) {
         if (.name == "dom") {
-            .opt[which.max(nchar(.opt))]
+            # .opt[which.max(nchar(.opt))]
+            .opt %>% dt_process_bundles_list_postprocess_align_dom()
         } else {
             if (!is.list(.opt)) {
                 unique(.opt)
             } else {
-                postprocess(.opt)
+                dt_process_bundles_postprocess(.opt)
             }
         }
     })
