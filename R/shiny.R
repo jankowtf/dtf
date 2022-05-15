@@ -6,6 +6,7 @@
 #' @description A shiny Module.
 #'
 #' @importFrom shiny NS tagList
+#' @export
 mod_render_dt_ui <- function(
     id,
     output_id = "dt"
@@ -31,7 +32,7 @@ mod_render_dt_ui <- function(
 #' @param output_id [[character]]
 #' @param verbose [[logical]] Print tracing information
 #'
-#' @noRd
+#' @export
 mod_render_dt_server <- function(
     id,
     output_id = character(),

@@ -1,3 +1,9 @@
+# dti 0.0.0.9008 (2022-05-15)
+
+Shiny modules exported
+
+----------
+
 # dti 0.0.0.9007 (2022-05-15)
 
 Small fixes
