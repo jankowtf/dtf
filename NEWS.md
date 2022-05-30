@@ -1,3 +1,13 @@
+# dti 0.0.0.9012 (2022-05-30)
+
+New default: id = character()
+
+- Modified module `mod_render_dt.R`: `id = character()`
+- Modified `dt_bundle_dom()`: new order logic (capital letters first then lowercase letters)
+- Aligned unit tests to new `dom` order logic
+
+----------
+
 # dti 0.0.0.9011 (2022-05-15)
 
 Internationalization

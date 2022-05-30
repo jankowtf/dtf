@@ -77,7 +77,7 @@ test_that("Process bundle: list of lists", {
         dt_bundle_buttons()
     ) %>% dt_process_bundles()
     expectation <- list(extensions = c("AutoFill", "Buttons"), options = list(autoFill = TRUE,
-        dom = "BRSfilprt", buttons = c("colvis", "copy", "csv", "excel",
+        dom = "Blftipr", buttons = c("colvis", "copy", "csv", "excel",
             "pdf", "print")))
     expect_identical(result, expectation)
 })
@@ -90,7 +90,7 @@ test_that("Prepare bundles", {
         extensions = c("AutoFill", "Buttons"),
         options = list(
             autoFill = TRUE,
-            dom = dt_bundle_dom(standalone = TRUE),
+            dom = dt_bundle_dom(B = TRUE, standalone = TRUE),
             buttons = c("colvis", "copy", "csv", "excel", "pdf", "print")
         )
     )
@@ -220,7 +220,7 @@ test_that("buttons", {
         extensions = "Buttons",
         options = list(
             # dom = "Bfrtip",
-            dom = dt_bundle_dom(standalone = TRUE),
+            dom = dt_bundle_dom(B = TRUE, standalone = TRUE),
             buttons = c("colvis", "copy", "csv", "excel", "pdf", "print")
         )
     )
@@ -230,7 +230,7 @@ test_that("buttons", {
     expectation <- list(
         extensions = "Buttons",
         options = list(
-            dom = dt_bundle_dom(standalone = TRUE),
+            dom = dt_bundle_dom(B = TRUE, standalone = TRUE),
             buttons = c("colvis")
         )
     )
@@ -240,7 +240,7 @@ test_that("buttons", {
     expectation <- list(
         extensions = "Buttons",
         options = list(
-            dom = dt_bundle_dom(standalone = TRUE),
+            dom = dt_bundle_dom(B = TRUE, standalone = TRUE),
             buttons = c("colvis", "print")
         )
     )
@@ -250,26 +250,26 @@ test_that("buttons", {
         list(extend = "colvis", text = "ABC"),
         "copy"
     )
-    expectation <- list(extensions = "Buttons", options = list(dom = "BRSfilprt",
+    expectation <- list(extensions = "Buttons", options = list(dom = "Blftipr",
         buttons = list(list(extend = "colvis", text = "ABC"), "copy")))
     expect_identical(result, expectation)
 })
 
 test_that("buttons: en", {
     result <- dt_bundle_buttons_en()
-    expectation <- list(extensions = "Buttons", options = list(dom = "BRSfilprt",
+    expectation <- list(extensions = "Buttons", options = list(dom = "Blftipr",
         buttons = list(list(extend = "colvis", text = "Columns"),
             list(extend = "collection", buttons = c("csv", "excel",
                 "pdf"), text = "Download"), "copy", "print")))
     expect_identical(result, expectation)
 
     result <- dt_bundle_buttons_en("colvis")
-    expectation <- list(extensions = "Buttons", options = list(dom = "BRSfilprt",
+    expectation <- list(extensions = "Buttons", options = list(dom = "Blftipr",
         buttons = list(list(extend = "colvis", text = "Columns"))))
     expect_identical(result, expectation)
 
     result <- dt_bundle_buttons_en("colvis", "print")
-    expectation <- list(extensions = "Buttons", options = list(dom = "BRSfilprt",
+    expectation <- list(extensions = "Buttons", options = list(dom = "Blftipr",
         buttons = list(list(extend = "colvis", text = "Columns"),
             "print")))
     expect_identical(result, expectation)
@@ -277,7 +277,7 @@ test_that("buttons: en", {
 
 test_that("buttons: de", {
     result <- dt_bundle_buttons_de()
-    expectation <- list(extensions = "Buttons", options = list(dom = "BRSfilprt",
+    expectation <- list(extensions = "Buttons", options = list(dom = "Blftipr",
         buttons = list(list(extend = "colvis", text = "Spalten"),
             list(extend = "collection", buttons = c("csv", "excel",
                 "pdf"), text = "Download"), list(extend = "copy", text = "Kopieren"),
@@ -285,12 +285,12 @@ test_that("buttons: de", {
     expect_identical(result, expectation)
 
     result <- dt_bundle_buttons_de("colvis")
-    expectation <- list(extensions = "Buttons", options = list(dom = "BRSfilprt",
+    expectation <- list(extensions = "Buttons", options = list(dom = "Blftipr",
         buttons = list(list(extend = "colvis", text = "Spalten"))))
     expect_identical(result, expectation)
 
     result <- dt_bundle_buttons_de("colvis", "print")
-    expectation <- list(extensions = "Buttons", options = list(dom = "BRSfilprt",
+    expectation <- list(extensions = "Buttons", options = list(dom = "Blftipr",
         buttons = list(list(extend = "colvis", text = "Spalten"),
             "print")))
     expect_identical(result, expectation)
@@ -375,13 +375,13 @@ test_that("rowreorder", {
 
 test_that("scroller", {
     result <- dt_bundle_scroller()
-    expectation <- list(extensions = "Scroller", options = list(deferRender = TRUE,
-        scrollY = 200, scroller = TRUE))
+    expectation <- list(extensions = "Scroller", options = list(dom = "Slftipr",
+        deferRender = TRUE, scrollY = 200, scroller = TRUE))
     expect_identical(result, expectation)
 
     result <- dt_bundle_scroller(scrollY = 100)
-    expectation <- list(extensions = "Scroller", options = list(deferRender = TRUE,
-        scrollY = 100, scroller = TRUE))
+    expectation <- list(extensions = "Scroller", options = list(dom = "Slftipr",
+        deferRender = TRUE, scrollY = 100, scroller = TRUE))
     expect_identical(result, expectation)
 })
 
@@ -390,19 +390,19 @@ test_that("scroller", {
 test_that("searchpanes", {
     result <- dt_bundle_searchpanes()
     expectation <- list(extensions = c("SearchPanes", "Select"), options = list(
-        dom = "BRSfilprtP", columnDefs = list(list(searchPanes = list(
+        dom = "Plftipr", columnDefs = list(list(searchPanes = list(
             show = FALSE), targets = 1L))), selection = "none")
     expect_identical(result, expectation)
 
     result <- dt_bundle_searchpanes(targets = 1:4)
     expectation <- list(extensions = c("SearchPanes", "Select"), options = list(
-        dom = "BRSfilprtP", columnDefs = list(list(searchPanes = list(
+        dom = "Plftipr", columnDefs = list(list(searchPanes = list(
             show = FALSE), targets = 1:4))), selection = "none")
     expect_identical(result, expectation)
 
     result <- dt_bundle_searchpanes(targets = "mpg", .data = mtcars)
     expectation <- list(extensions = c("SearchPanes", "Select"), options = list(
-        dom = "BRSfilprtP", columnDefs = list(list(searchPanes = list(
+        dom = "Plftipr", columnDefs = list(list(searchPanes = list(
             show = FALSE), targets = 2:11))), selection = "none")
     expect_identical(result, expectation)
 })
@@ -411,14 +411,14 @@ test_that("searchpanes", {
 
 test_that("select", {
     result <- dt_bundle_select()
-    expectation <- list(extensions = c("Select", "Buttons"), options = list(dom = "BRSfilprt",
+    expectation <- list(extensions = c("Select", "Buttons"), options = list(dom = "Blftipr",
         rowId = 0, buttons = c("selectAll", "selectNone", "selectRows",
             "selectColumns", "selectCells"), select = list(style = "os",
                 items = "row")), selection = "none")
     expect_identical(result, expectation)
 
     result <- dt_bundle_select("selectAll", "selectNone")
-    expectation <- list(extensions = c("Select", "Buttons"), options = list(dom = "BRSfilprt",
+    expectation <- list(extensions = c("Select", "Buttons"), options = list(dom = "Blftipr",
         rowId = 0, buttons = c("selectAll", "selectNone"), select = list(
             style = "os", items = "row")), selection = "none")
     expect_identical(result, expectation)
@@ -430,12 +430,12 @@ test_that("select", {
 
 test_that("lengthmenue", {
     result <- dt_bundle_lengthmenue()
-    expectation <- list(options = list(dom = "BRSfilprt", paging = TRUE, lengthMenu = list(
+    expectation <- list(options = list(dom = "lftipr", paging = TRUE, lengthMenu = list(
         c(15, 50, 100, -1), c("15", "50", "100", "All")), pageLength = 50))
     expect_identical(result, expectation)
 
     result <- dt_bundle_lengthmenue(lengthMenu = c(15, 50, 100))
-    expectation <- list(options = list(dom = "BRSfilprt", paging = TRUE, lengthMenu = c(15,
+    expectation <- list(options = list(dom = "lftipr", paging = TRUE, lengthMenu = c(15,
         50, 100), pageLength = 50))
     expect_identical(result, expectation)
 })
@@ -444,6 +444,12 @@ test_that("lengthmenue", {
 
 test_that("internationalization", {
     result <- dt_bundle_internationalization()
+    expectation <- list(options = list(language = list(url = character())))
+    expect_identical(result, expectation)
+})
+
+test_that("internationalization: de", {
+    result <- dt_bundle_internationalization(url = "//cdn.datatables.net/plug-ins/1.12.0/i18n/de-DE.json")
     expectation <- list(options = list(language = list(url = "//cdn.datatables.net/plug-ins/1.12.0/i18n/de-DE.json")))
     expect_identical(result, expectation)
 })
@@ -468,31 +474,25 @@ test_that("naturaljs", {
 
 test_that("scroller", {
     result <- dt_bundle_scroller()
-    expectation <- list(
-        extensions = "Scroller",
-        options = list(
-            deferRender = TRUE,
-            scrollY = 200,
-            scroller = TRUE
-        )
-    )
+    expectation <- list(extensions = "Scroller", options = list(dom = "Slftipr",
+        deferRender = TRUE, scrollY = 200, scroller = TRUE))
     expect_identical(result, expectation)
 })
 
 test_that("searchpanes", {
     result <- dt_bundle_searchpanes()
     expectation <- list(extensions = c("SearchPanes", "Select"), options = list(
-        dom = "BRSfilprtP", columnDefs = list(list(searchPanes = list(
+        dom = "Plftipr", columnDefs = list(list(searchPanes = list(
             show = FALSE), targets = 1L))), selection = "none")
     expect_identical(result, expectation)
 })
 
 test_that("dom", {
     result <- dt_bundle_dom()
-    expectation <- list(options = list(dom = structure("BRSfilprt")))
+    expectation <- list(options = list(dom = structure("lftipr")))
     expect_identical(result, expectation)
 
     result <- dt_bundle_dom(f = FALSE, B = FALSE, Q = TRUE, consolidate = FALSE)
-    expectation <- list(options = list(dom = structure("QRSilprt")))
+    expectation <- list(options = list(dom = structure("Qltipr")))
     expect_identical(result, expectation)
 })

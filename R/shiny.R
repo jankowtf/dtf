@@ -9,7 +9,7 @@
 #' @importFrom shiny NS tagList
 #' @export
 mod_render_dt_ui <- function(
-    id,
+    id = character(),
     output_id = "dt",
     .verbose = FALSE
 ){
@@ -43,7 +43,7 @@ mod_render_dt_ui <- function(
 #'
 #' @export
 mod_render_dt_server <- function(
-    id,
+    id = character(),
     output_id = character(),
     data,
     # filter = c("none", "bottom", "top"),
