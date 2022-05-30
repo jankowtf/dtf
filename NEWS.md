@@ -1,5 +1,10 @@
-# dtf (development version)
+# dtf 0.0.0.9015 (2022-05-30)
 
+Fixed verbose for UI function (no input)
+
+- Updated tracing info when setting `.verbose = TRUE` in `mod_render_dt_ui()`
+
+----------
 # dtf 0.0.0.9014 (2022-05-30)
 
 Verbose

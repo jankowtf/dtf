@@ -20,10 +20,6 @@ mod_render_dt_ui <- function(
         logger::log_trace("ns: {ns(character())}")
         logger::log_trace("output_id: {output_id}")
         logger::log_trace("ns(output_id): {ns(output_id)}")
-        observe({
-            input %>% names() %>% sort() %>% print()
-            input[[output_id]] %>% print()
-        })
     }
 
     DT::dataTableOutput(ns(output_id))
