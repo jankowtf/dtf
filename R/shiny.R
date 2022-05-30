@@ -15,9 +15,10 @@ mod_render_dt_ui <- function(
 ){
     ns <- NS(id)
 
-    shiny_trace_ns(
+    shiny_trace_ns_ui(
         fn_name = "mod_render_dt_ui",
         id_inner = output_id,
+        ns = ns,
         .verbose = .verbose
     )
 
@@ -65,7 +66,7 @@ mod_render_dt_server <- function(
     shiny::moduleServer(id, function(input, output, session) {
         ns <- session$ns
 
-        shiny_trace_ns(
+        shiny_trace_ns_server(
             fn_name = "mod_render_dt_server",
             id_inner = output_id,
             .verbose = .verbose
@@ -129,7 +130,21 @@ mod_render_dt_server <- function(
     })
 }
 
-shiny_trace_ns <- function(
+shiny_trace_ns_ui <- function(
+    fn_name,
+    id_inner,
+    ns,
+    .verbose = FALSE
+) {
+    if (.verbose) {
+        logger::log_trace("Function: {fn_name}")
+        logger::log_trace("ns: {ns(character())}")
+        logger::log_trace("id_inner: {id_inner}")
+        logger::log_trace("ns(id_inner): {ns(id_inner)}")
+    }
+}
+
+shiny_trace_ns_server <- function(
     fn_name,
     id_inner,
     .verbose = FALSE,
@@ -139,7 +154,7 @@ shiny_trace_ns <- function(
         ns <- session$ns
 
         if (.verbose) {
-            logger::log_trace("Function: fn_name")
+            logger::log_trace("Function: {fn_name}")
             logger::log_trace("ns: {ns(character())}")
             logger::log_trace("id_inner: {id_inner}")
             logger::log_trace("ns(id_inner): {ns(id_inner)}")

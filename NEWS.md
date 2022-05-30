@@ -1,3 +1,13 @@
+# dtf 0.0.0.9017 (2022-05-30)
+
+Bugfix in tracing shiny NS info
+
+- Fixed `shiny_trace_ns()`: now split into `shiny_trace_ns_ui()` and `shiny_trace_ns_server()`
+- Modified `mod_render_dt_ui`: uses `shiny_trace_ns_ui()`
+- Modified `mod_render_dt_server`: uses `shiny_trace_ns_server()`
+
+----------
+
 # dtf 0.0.0.9016 (2022-05-30)
 
 Tracing shiny NS info
