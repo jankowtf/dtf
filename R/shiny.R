@@ -16,9 +16,14 @@ mod_render_dt_ui <- function(
     ns <- NS(id)
 
     if (.verbose) {
-        print(ns(""))
-        print(output_id)
-        print(ns(output_id))
+        logger::log_trace("Function: mod_render_dt_ui")
+        logger::log_trace("ns: {ns(character())}")
+        logger::log_trace("output_id: {output_id}")
+        logger::log_trace("ns(output_id): {ns(output_id)}")
+        observe({
+            input %>% names() %>% sort() %>% print()
+            input[[output_id]] %>% print()
+        })
     }
 
     DT::dataTableOutput(ns(output_id))
@@ -44,7 +49,7 @@ mod_render_dt_ui <- function(
 #' @export
 mod_render_dt_server <- function(
     id = character(),
-    output_id = character(),
+    output_id = "dt",
     data,
     # filter = c("none", "bottom", "top"),
     scrollY = 400,
@@ -66,9 +71,14 @@ mod_render_dt_server <- function(
         ns <- session$ns
 
         if (.verbose) {
-            print(ns(""))
-            print(output_id)
-            print(ns(output_id))
+            logger::log_trace("Function: mod_render_dt_server")
+            logger::log_trace("ns: {ns(character())}")
+            logger::log_trace("output_id: {output_id}")
+            logger::log_trace("ns(output_id): {ns(output_id)}")
+            observe({
+                input %>% names() %>% sort() %>% print()
+                input[[output_id]] %>% print()
+            })
         }
 
         # Bundles

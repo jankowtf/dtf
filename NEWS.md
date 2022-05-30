@@ -1,3 +1,11 @@
+# dtf 0.0.0.9014 (2022-05-30)
+
+Verbose
+
+- Updated tracing info when setting `.verbose = TRUE` in module `mod_render_dt.R`
+
+----------
+
 # dtf 0.0.0.9013 (2022-05-30)
 
 Renamed to 'dtf'
