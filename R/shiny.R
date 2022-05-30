@@ -15,12 +15,11 @@ mod_render_dt_ui <- function(
 ){
     ns <- NS(id)
 
-    if (.verbose) {
-        logger::log_trace("Function: mod_render_dt_ui")
-        logger::log_trace("ns: {ns(character())}")
-        logger::log_trace("output_id: {output_id}")
-        logger::log_trace("ns(output_id): {ns(output_id)}")
-    }
+    shiny_trace_ns(
+        fn_name = "mod_render_dt_ui",
+        id_inner = output_id,
+        .verbose = .verbose
+    )
 
     DT::dataTableOutput(ns(output_id))
 }
@@ -66,16 +65,11 @@ mod_render_dt_server <- function(
     shiny::moduleServer(id, function(input, output, session) {
         ns <- session$ns
 
-        if (.verbose) {
-            logger::log_trace("Function: mod_render_dt_server")
-            logger::log_trace("ns: {ns(character())}")
-            logger::log_trace("output_id: {output_id}")
-            logger::log_trace("ns(output_id): {ns(output_id)}")
-            observe({
-                input %>% names() %>% sort() %>% print()
-                input[[output_id]] %>% print()
-            })
-        }
+        shiny_trace_ns(
+            fn_name = "mod_render_dt_server",
+            id_inner = output_id,
+            .verbose = .verbose
+        )
 
         # Bundles
         bundles_default <- list(
@@ -132,5 +126,27 @@ mod_render_dt_server <- function(
 
         # Return rendered data
         return(data_rendered)
+    })
+}
+
+shiny_trace_ns <- function(
+    fn_name,
+    id_inner,
+    .verbose = FALSE,
+    .id = character()
+) {
+    shiny::moduleServer(.id, function(input, output, session) {
+        ns <- session$ns
+
+        if (.verbose) {
+            logger::log_trace("Function: fn_name")
+            logger::log_trace("ns: {ns(character())}")
+            logger::log_trace("id_inner: {id_inner}")
+            logger::log_trace("ns(id_inner): {ns(id_inner)}")
+            observe({
+                input %>% names() %>% sort() %>% print()
+                input[[id_inner]] %>% print()
+            })
+        }
     })
 }

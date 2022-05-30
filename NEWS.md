@@ -1,3 +1,12 @@
+# dtf 0.0.0.9016 (2022-05-30)
+
+Tracing shiny NS info
+
+- Added `shiny_trace_ns()` to trace shiny NS info
+- Modified module `mod_render_dt.R`: refactred tracing part by using `shiny_trace_ns()`
+
+----------
+
 # dtf 0.0.0.9015 (2022-05-30)
 
 Fixed verbose for UI function (no input)
@@ -5,6 +14,7 @@ Fixed verbose for UI function (no input)
 - Updated tracing info when setting `.verbose = TRUE` in `mod_render_dt_ui()`
 
 ----------
+
 # dtf 0.0.0.9014 (2022-05-30)
 
 Verbose
