@@ -1,4 +1,13 @@
-# dti 0.0.0.9012 (2022-05-30)
+# dtf 0.0.0.9013 (2022-05-30)
+
+Renamed to 'dtf'
+
+- Renamed the package to `dtf` as I discovered that `dti` was already taken by a
+CRAN package
+
+----------
+
+# dtf 0.0.0.9012 (2022-05-30)
 
 New default: id = character()
 
@@ -8,7 +17,7 @@ New default: id = character()
 
 ----------
 
-# dti 0.0.0.9011 (2022-05-15)
+# dtf 0.0.0.9011 (2022-05-15)
 
 Internationalization
 
@@ -18,7 +27,7 @@ Internationalization
 
 ----------
 
-# dti 0.0.0.9010 (2022-05-15)
+# dtf 0.0.0.9010 (2022-05-15)
 
 Fixed UI module
 
@@ -26,19 +35,19 @@ Fixed UI module
 
 ----------
 
-# dti 0.0.0.9009 (2022-05-15)
+# dtf 0.0.0.9009 (2022-05-15)
 
 Roxygen and colreorder
 
 ----------
 
-# dti 0.0.0.9008 (2022-05-15)
+# dtf 0.0.0.9008 (2022-05-15)
 
 Shiny modules exported
 
 ----------
 
-# dti 0.0.0.9007 (2022-05-15)
+# dtf 0.0.0.9007 (2022-05-15)
 
 Small fixes
 
@@ -47,7 +56,7 @@ Small fixes
 
 ----------
 
-# dti 0.0.0.9006 (2022-05-15)
+# dtf 0.0.0.9006 (2022-05-15)
 
 Shiny module
 
@@ -65,7 +74,7 @@ Shiny module
 
 ----------
 
-# dti 0.0.0.9005 (2022-05-15)
+# dtf 0.0.0.9005 (2022-05-15)
 
 Fixed list bundle processing
 
@@ -77,7 +86,7 @@ either through `dt_process_bundles()` or through `datatable2(..., verbose = TRUE
 
 ----------
 
-# dti 0.0.0.9004 (2022-05-14)
+# dtf 0.0.0.9004 (2022-05-14)
 
 Length menue + internationalization
 
@@ -86,21 +95,21 @@ Length menue + internationalization
 
 ----------
 
-# dti 0.0.0.9003 (2022-05-05)
+# dtf 0.0.0.9003 (2022-05-05)
 
 drop
 
 ----------
 
-# dti 0.0.0.9002 (2022-05-02)
+# dtf 0.0.0.9002 (2022-05-02)
 
 Refactored bundle code
 
 ----------
 
-# dti 0.0.0.9001 (2022-04-25)
+# dtf 0.0.0.9001 (2022-04-25)
 
-Renamed to 'dti'
+Renamed to 'dtf'
 
 - Refactored bundle code: 
     - `dt_bundle_autofill()`
@@ -117,7 +126,7 @@ Renamed to 'dti'
 
 ----------
 
-# dti 0.0.0.9000 (2022-04-14)
+# dtf 0.0.0.9000 (2022-04-14)
 
 - Added a `NEWS.md` file to track changes to the package.
 - Added `R/dt.R` code from another project

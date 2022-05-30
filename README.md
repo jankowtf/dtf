@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dti
+# dtf
 
 <!-- badges: start -->
 
@@ -18,7 +18,7 @@ You can install the development version of from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("rappster/dti")
+remotes::install_github("rappster/dtf")
 ```
 
 ## What?
@@ -34,7 +34,7 @@ Because I never seem to be able to remember the exact combination of
 ## How?
 
 ``` r
-library(dti)
+library(dtf)
 ```
 
 ### Bundle `AutoFill`

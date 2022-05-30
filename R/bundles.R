@@ -156,7 +156,7 @@ dt_bundle_autofill <- function(
 #'   disregarded
 #' @param .as_is ([logical]) Use argument values "as is", i.e. pass it along
 #'   without further processing it. Experimental and not activated yet (see
-#'   [dti::dt_bunle_buttons_de()] for commented-out section)
+#'   [dtf::dt_bunle_buttons_de()] for commented-out section)
 #'
 #' @return
 #' @export
@@ -204,7 +204,7 @@ dt_bundle_buttons <- function(
 #'   disregarded
 #' @param .as_is ([logical]) Use argument values "as is", i.e. pass it along
 #'   without further processing it. Experimental and not activated yet (see
-#'   [dti::dt_bunle_buttons_de()] for commented-out section)
+#'   [dtf::dt_bunle_buttons_de()] for commented-out section)
 #'
 #' @return
 #' @export
