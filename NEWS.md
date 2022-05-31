@@ -1,3 +1,11 @@
+# dtf 0.0.0.9019 (2022-05-31)
+
+Fixed verbose
+
+- Fixed type in `mod_render_dt_server`: `.verbose = verbose` in call to `datatable2()`
+
+----------
+
 # dtf 0.0.0.9018 (2022-05-31)
 
 Verbose

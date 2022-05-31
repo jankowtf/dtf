@@ -114,7 +114,7 @@ mod_render_dt_server <- function(
                 escape = .escape,
                 # selection = selection,
                 # filter = filter,
-                verbose = verbose,
+                .verbose = verbose,
                 ...
             )
         })
