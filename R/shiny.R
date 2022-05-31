@@ -2,7 +2,7 @@
 #'
 #' @param id [[character]]
 #' @param output_id [[character]]
-#' @param .verbose [[logical]]
+#' @param verbose [[logical]]
 #'
 #' @description A shiny Module.
 #'
@@ -11,7 +11,7 @@
 mod_render_dt_ui <- function(
     id = character(),
     output_id = "dt",
-    .verbose = FALSE
+    verbose = FALSE
 ){
     ns <- NS(id)
 
@@ -19,7 +19,7 @@ mod_render_dt_ui <- function(
         fn_name = "mod_render_dt_ui",
         id_inner = output_id,
         ns = ns,
-        .verbose = .verbose
+        verbose = verbose
     )
 
     DT::dataTableOutput(ns(output_id))
@@ -39,7 +39,7 @@ mod_render_dt_ui <- function(
 #' @param .rownames [[logical]]
 #' @param .editable [[logical]]
 #' @param .escape [[logical]]
-#' @param .verbose [[logical]]
+#' @param verbose [[logical]]
 #' @param ... Addtional arguments passed to [DT::datatable()]
 #'
 #' @export
@@ -60,7 +60,7 @@ mod_render_dt_server <- function(
     .rownames = TRUE,
     .editable = FALSE,
     .escape = TRUE,
-    .verbose = FALSE,
+    verbose = FALSE,
     ...
 ) {
     shiny::moduleServer(id, function(input, output, session) {
@@ -69,7 +69,7 @@ mod_render_dt_server <- function(
         shiny_trace_ns_server(
             fn_name = "mod_render_dt_server",
             id_inner = output_id,
-            .verbose = .verbose
+            verbose = verbose
         )
 
         # Bundles
@@ -114,7 +114,7 @@ mod_render_dt_server <- function(
                 escape = .escape,
                 # selection = selection,
                 # filter = filter,
-                .verbose = .verbose,
+                verbose = verbose,
                 ...
             )
         })
@@ -134,9 +134,9 @@ shiny_trace_ns_ui <- function(
     fn_name,
     id_inner,
     ns,
-    .verbose = FALSE
+    verbose = FALSE
 ) {
-    if (.verbose) {
+    if (verbose) {
         logger::log_trace("Function: {fn_name}")
         logger::log_trace("ns: {ns(character())}")
         logger::log_trace("id_inner: {id_inner}")
@@ -147,21 +147,27 @@ shiny_trace_ns_ui <- function(
 shiny_trace_ns_server <- function(
     fn_name,
     id_inner,
-    .verbose = FALSE,
+    verbose = FALSE,
     .id = character()
 ) {
     shiny::moduleServer(.id, function(input, output, session) {
         ns <- session$ns
 
-        if (.verbose) {
-            logger::log_trace("Function: {fn_name}")
-            logger::log_trace("ns: {ns(character())}")
-            logger::log_trace("id_inner: {id_inner}")
-            logger::log_trace("ns(id_inner): {ns(id_inner)}")
-            observe({
-                input %>% names() %>% sort() %>% print()
-                input[[id_inner]] %>% print()
-            })
-        }
+        observe({
+            if (verbose) {
+                logger::log_trace("Function: {fn_name}")
+                logger::log_trace("ns: {ns(character())}")
+
+                id_inner <- if (inherits(id_inner, "reactive")) {
+                    id_inner()
+                } else (
+                    id_inner
+                )
+
+                id_inner %>% purrr::walk(~logger::log_trace("id_inner: {.x}"))
+                id_inner %>% purrr::walk(~logger::log_trace("ns(id_inner): {ns(.x)}"))
+                id_inner %>% purrr::walk(~input[[.x]] %>% logger::log_eval())
+            }
+        })
     })
 }

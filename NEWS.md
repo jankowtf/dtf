@@ -1,3 +1,11 @@
+# dtf 0.0.0.9018 (2022-05-31)
+
+Verbose
+
+- Modified module `mod_render_dt.R`: renamed arg from `.verbose` to `verbose` to make it more consistent with other packages (e.g. `shimo.eda`)
+
+----------
+
 # dtf 0.0.0.9017 (2022-05-30)
 
 Bugfix in tracing shiny NS info
