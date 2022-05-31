@@ -35,6 +35,8 @@ mod_render_dt_ui <- function(
 #' @param scrollY [[integer]]
 #' @param left [[integer]]
 #' @param right [[integer]]
+#' @param server [[logical]] Server-side processing yes/no. See
+#'   [DT::renderDataTable]
 #' @param trans_fn [[function]]
 #' @param rename_fn [[function]]
 #' @param .bundles_default [[list]] Default bundles
@@ -54,6 +56,7 @@ mod_render_dt_server <- function(
     scrollY = 400,
     left = integer(),
     right = integer(),
+    server = FALSE,
     # selection = valid_dt_arg_selection("none"),
     trans_fn = identity,
     rename_fn = identity,
@@ -127,7 +130,7 @@ mod_render_dt_server <- function(
                 .verbose = verbose,
                 ...
             )
-        })
+        }, server = server)
 
         # Write to output
         if (length(output_id)) {

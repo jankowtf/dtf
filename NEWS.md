@@ -1,3 +1,11 @@
+# dtf 0.0.0.9022 (2022-05-31)
+
+Server-side processing
+
+- Modified `mod_render_dt_server()`: added arg `server` for server-side processing
+
+-----
+
 # dtf 0.0.0.9021 (2022-05-31)
 
 Exported 'valid_dt_filter_values()'
