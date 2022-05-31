@@ -1,3 +1,11 @@
+# dtf 0.0.0.9021 (2022-05-31)
+
+Exported 'valid_dt_filter_values()'
+
+- Export `valid_dt_filter_values()`
+
+----------
+
 # dtf 0.0.0.9020 (2022-05-31)
 
 Filter & default bundles

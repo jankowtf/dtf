@@ -1021,6 +1021,21 @@ valid_dt_options_select <- function(
     valid::valid2(..., .choices = choices, .unname = .unname)
 }
 
+#' Valid values for DT argument `filter`
+#'
+#' See https://rstudio.github.io/DT/
+#'
+#' @param ...
+#' @param .unname
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' valid_dt_filter_values()
+#' valid_dt_filter_values(1)
+#' valid_dt_filter_values("top")
+#' try(valid_dt_filter_values("invalid"))
 valid_dt_filter_values <- function(
     ...,
     .unname = TRUE
