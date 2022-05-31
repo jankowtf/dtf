@@ -1,3 +1,14 @@
+# dtf 0.0.0.9020 (2022-05-31)
+
+Filter & default bundles
+
+- Added `valid_dt_filter_value()`
+- Modified module `mod_render_dt.R`: 
+    - added arg `filter` to enable column filters
+    - added arg `.bundles_default` to better control default bundles
+
+----------
+
 # dtf 0.0.0.9019 (2022-05-31)
 
 Fixed verbose

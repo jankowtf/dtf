@@ -600,6 +600,10 @@ mtcars %>%
     datatable2(
         bundles = dt_bundle_searchpanes(targets = "carb", .data = mtcars)
     )
+# mtcars %>%
+#     datatable2(
+#         bundles = dt_bundle_searchpanes(collapse = TRUE)
+#     )
 ```
 
 Custom `.options` object 
@@ -910,3 +914,19 @@ mtcars %>%
         )
     )
 ```
+
+```{r}
+mtcars %>% 
+    datatable2(
+        bundles = list(
+            dt_bundle_buttons(),
+            dt_bundle_searchpanes()
+        )
+    )
+```
+
+```{r}
+mtcars %>% 
+    datatable2(filter = "top")
+```
+

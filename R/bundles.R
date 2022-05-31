@@ -778,6 +778,7 @@ dt_bundle_scroller <- function(
 dt_bundle_searchpanes <- function(
     show = FALSE,
     targets = 1L,
+    # collapse = FALSE,
     .options = list(),
     .data = tibble::tibble()
 ) {
@@ -795,6 +796,7 @@ dt_bundle_searchpanes <- function(
 
     extension_options <- compose_extension_options(
         show = show,
+        # collapse = collapse,
         .option_name = option_name_sp,
         .extension_options = .options
     )

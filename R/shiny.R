@@ -30,11 +30,14 @@ mod_render_dt_ui <- function(
 #' @param id [[character]]
 #' @param output_id [[character]]
 #' @param data
+#' @param filter [[character]] Column filter settings. See
+#'   [valid_dt_filter_values] and [DT::datatable] for details
 #' @param scrollY [[integer]]
 #' @param left [[integer]]
 #' @param right [[integer]]
 #' @param trans_fn [[function]]
 #' @param rename_fn [[function]]
+#' @param .bundles_default [[list]] Default bundles
 #' @param .bundles [[list]]
 #' @param .rownames [[logical]]
 #' @param .editable [[logical]]
@@ -47,14 +50,21 @@ mod_render_dt_server <- function(
     id = character(),
     output_id = "dt",
     data,
-    # filter = c("none", "bottom", "top"),
+    filter = valid_dt_filter_values(1),
     scrollY = 400,
     left = integer(),
     right = integer(),
     # selection = valid_dt_arg_selection("none"),
-    # fixedColumns.leftColumns = 1,
     trans_fn = identity,
     rename_fn = identity,
+    .bundles_default = list(
+        dt_bundle_scroller(scrollY = scrollY),
+        dt_bundle_colreorder(),
+        dt_bundle_fixedheader(),
+        dt_bundle_fixedcolumns(left = left),
+        dt_bundle_keytable(),
+        dt_bundle_internationalization()
+    ),
     .bundles = list(),
     # dt_bundle_buttons_en(), # keep this in mind
     .rownames = TRUE,
@@ -73,17 +83,17 @@ mod_render_dt_server <- function(
         )
 
         # Bundles
-        bundles_default <- list(
-            dt_bundle_scroller(scrollY = scrollY),
-            dt_bundle_colreorder(),
-            dt_bundle_fixedheader(),
-            dt_bundle_fixedcolumns(left = left),
-            dt_bundle_keytable(),
-            dt_bundle_internationalization()
-        )
+        # bundles_default <- list(
+        #     dt_bundle_scroller(scrollY = scrollY),
+        #     dt_bundle_colreorder(),
+        #     dt_bundle_fixedheader(),
+        #     dt_bundle_fixedcolumns(left = left),
+        #     dt_bundle_keytable(),
+        #     dt_bundle_internationalization()
+        # )
 
         bundles <- c(
-            bundles_default,
+            .bundles_default,
             .bundles
         )
 
@@ -113,7 +123,7 @@ mod_render_dt_server <- function(
                 editable = .editable,
                 escape = .escape,
                 # selection = selection,
-                # filter = filter,
+                filter = filter,
                 .verbose = verbose,
                 ...
             )

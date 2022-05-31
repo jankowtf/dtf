@@ -1021,6 +1021,23 @@ valid_dt_options_select <- function(
     valid::valid2(..., .choices = choices, .unname = .unname)
 }
 
+valid_dt_filter_values <- function(
+    ...,
+    .unname = TRUE
+) {
+    value <- rlang::list2(...) %>%
+        unlist()
+
+    choices <- c(
+        "none",
+        "bottom",
+        "top"
+    )
+    names(choices) <- choices
+
+    valid::valid2(..., .choices = choices, .unname = .unname)
+}
+
 if (FALSE) {
     "language.select
 
